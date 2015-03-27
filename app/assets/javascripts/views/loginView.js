@@ -4,7 +4,7 @@ playa.LoginView = Backbone.View.extend({
 
   el: '#main',
   events: {
-    "click .nav-link-log-in": 'showLoginForm'
+    "click .log-in-btn": 'userLogIn'
   },
 
   render: function() {
@@ -13,6 +13,16 @@ playa.LoginView = Backbone.View.extend({
     var loginViewTemplate = $('#userLogInView-template').html();
     var loginViewHTML = _.template(loginViewTemplate);
     this.$el.html(loginViewHTML);
+  },
+
+  userLogIn: function(){
+    console.log('userlogin function called')
+    var username = $('#username').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var password_confirmation = $('#password_confirmation').val();
+    
   }
+
 });
 

@@ -1,9 +1,11 @@
 var playa = playa || {};
 
-playa.user = Backbone.Model.extend({
-  urlRoot: '/index',
+playa.User = Backbone.Model.extend({
+  urlRoot: '/users',
   defaults: {
-    content:''
+    // content:''
   }
 
 });
+
+

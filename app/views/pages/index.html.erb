@@ -1,10 +1,61 @@
 <header>
   <h1 class="title">Playa<i class="fa fa-play"></i></h1>
   <nav>
-<!--       <a href="" class="nav-link nav-link-home">Home</a>
-    <a href="#search" class="nav-link">Search Flights</a>
-    <a href="#planes" class="nav-link">Create Plane</a>
-    <a href="#flights" class="nav-link">Create Flight</a> -->
+    <%if @current_user.present? %>
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link nav-link-username">Username</li>
+          <li class="nav-link nav-link-new-playlist">New playlist</li>
+          <li class="nav-link nav-link-my-playlists">My playlists</li>
+          <li class="nav-link nav-link-log-out">Log out</li>
+        </ul>
+      </div>
+    <%else%>
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link nav-link-log-in"><a href="#login">Log in</a></li>
+          <li class="nav-link nav-link-sign-up"><a href="#signup">Sign up</a></li>
+        </ul>
+      </div>
+    <%end%>
   </nav>
 </header>
 <div id="main"></div>
+
+<script id="userLogInView-template" type="text/x-template">
+  <h2>Log in</h2> 
+  <form> 
+    <div>
+      <label for="username">Username</label><br> 
+      <input id="username" placeholder="Enter your username"></input> 
+    </div> 
+    <div>
+      <label for="password">Password</label><br>
+      <input id="email" placeholder="Enter your password"></input> 
+    </div> 
+    <button class="btn log-in-btn">Log in</button> 
+  </form>  
+</script>
+
+<script id="userSignUpView-template" type="text/x-template">
+  <h2>Sign up</h2> 
+  <form> 
+    <div>
+      <label for="username">Username</label><br> 
+      <input id="username" placeholder="Enter your username"></input> 
+    </div> 
+    <div>
+      <label for="email">Email</label><br> 
+      <input id="email" placeholder="Enter your email"></input> 
+    </div> 
+    <div>
+      <label for="password">Password</label><br>
+      <input id="email" placeholder="Enter your password"></input> 
+    </div> 
+    <div>
+      <label for="password_confirmation">Password Confirmation</label><br>
+      <input id="password_confirmation" placeholder="Confirm password"></input>
+    </div> 
+    <button class="btn sign-up-btn">Sign up</button> 
+  </form>  
+</script>

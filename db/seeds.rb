@@ -38,11 +38,11 @@ s13 = Song.create(:url => 'https://soundcloud.com/poppyhenri/deee-lite-groove-is
 s14 = Song.create(:url => 'https://soundcloud.com/robyn/dancing-on-my-own')
 s15 = Song.create(:url => 'https://soundcloud.com/robyn/call-your-girlfriend')
 
-# #create skips
-# Skip.create(:user_id => u1.id, :song_id => s15.id)
-# Skip.create(:user_id => u2.id, :song_id => s14.id)
-# Skip.create(:user_id => u3.id, :song_id => s13.id)
-# Skip.create(:user_id => u4.id, :song_id => s12.id)
+#create skips
+Skip.create(:user_id => u1.id, :song_id => s15.id)
+Skip.create(:user_id => u2.id, :song_id => s14.id)
+Skip.create(:user_id => u3.id, :song_id => s13.id)
+Skip.create(:user_id => u4.id, :song_id => s12.id)
 
 #Associate users with playlists
 u1.playlists << p1 << p2 << p3
@@ -60,8 +60,8 @@ p7.songs << s13 << s14 << s15
 
 #Associate songs with users
 u1.songs << s1 << s2 << s3
-u2.songs << s3 << s4 << s5
-u3.songs << s5 << s6 << s7
+u2.songs << s4 << s5
+u3.songs << s6 << s7
 u4.songs << s8 << s9 << s10
 u5.songs << s11 << s12 << s13
 u6.songs << s14 << s15

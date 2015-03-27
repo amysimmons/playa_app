@@ -6,15 +6,17 @@ playa.Router = Backbone.Router.extend({
     // as soon as i load the page, look at the index, and run the index function
     '': 'index',
     'login': 'login',
-    'signup': 'signup'
-
-    // log in sign up funciton below, 
-    // these fnctions just show the view
+    'signup': 'signup',
+    'newplaylist': 'newplaylist',
+    'addsongs': 'addsongs',
+    'shareplaylist': 'shareplaylist',
+    'myplaylists': 'myplaylists'
 
   },
   index: function(){
     var appView = new playa.AppView();
     appView.render();
+
   },
   login: function(){
     var loginView = new playa.LoginView();
@@ -23,6 +25,23 @@ playa.Router = Backbone.Router.extend({
   signup: function(){
     var signupView = new playa.SignupView();
     signupView.render();
+  },
+  newplaylist: function(){
+    var newPlaylistView = new playa.NewPlaylistView();
+    newPlaylistView.render();
+  },
+  addsongs: function(){
+    var addSongsView = new playa.AddSongsView();
+    addSongsView.render();
+  },
+  shareplaylist: function(){
+    var sharePlaylistView = new playa.SharePlaylistView();
+    sharePlaylistView.render();
+  },
+  myplaylists: function(){
+    var myPlaylistsView = new playa.MyPlaylistsView();
+    myPlaylistsView.render();
   }
 
 });
+

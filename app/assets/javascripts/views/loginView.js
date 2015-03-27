@@ -1,5 +1,4 @@
 var playa = playa || {};
-console.log("WHATTHAHIAHKN")
 playa.LoginView = Backbone.View.extend({
 
   el: '#main',
@@ -17,11 +16,16 @@ playa.LoginView = Backbone.View.extend({
 
   userLogIn: function(){
     console.log('userlogin function called')
+
     var username = $('#username').val();
-    var email = $('#email').val();
     var password = $('#password').val();
-    var password_confirmation = $('#password_confirmation').val();
-    
+
+    var session = new playa.Session({username: username,password: password});
+    session.save();
+
+    // this line not working
+    playa.Router.navigate("newplaylist", true)
+
   }
 
 });

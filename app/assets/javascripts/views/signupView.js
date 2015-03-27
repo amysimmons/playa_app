@@ -25,10 +25,7 @@ playa.SignupView = Backbone.View.extend({
     // debugger;
     var user = new playa.User({username: username,email: email,password: password,password_confirmation: password_confirmation});
     user.save();
-
   }
-
  // listen for the submit buttons and send data to server 
-
 
 });

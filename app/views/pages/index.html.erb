@@ -47,7 +47,7 @@
       <div class="nav-links">
         <ul>
           <li class="nav-link nav-link-username">Username</li>
-          <li class="nav-link nav-link-new-playlist">New playlist</li>
+          <li class="nav-link nav-link-new-playlist"><a href="#newplaylist">New playlist</a></li>
           <li class="nav-link nav-link-my-playlists"><a href="#myplaylists">My playlists</a></li>
           <li class="nav-link nav-link-log-out"><a href="logout">Log out</a></li>
         </ul>
@@ -107,8 +107,8 @@
 
 <script id="sharePlaylistView-template" type="text/x-template">
   <h2><span class="step">Step3: </span>Share playlist</h2> 
-  <p>Your playlist URL is: </p>
-  <a href="">View Playlist</a>
+  <p>Your playlist URL is: <a href="#" + {{playlistURL}} >{playlistURL}}</a>{</p>
+  <a href="" class="go-to-playlist">View Playlist</a>
 </script>
 
 <script id="myPlaylistsViewTitle-template" type="text/x-template">

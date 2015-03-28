@@ -28,14 +28,28 @@ playa.NewPlaylistView = Backbone.View.extend({
     var name = $('#name').val();
     var song_limit = $('#song-limit').val();
     var playlist = new playa.Playlist({name: name, song_limit: song_limit, user_id: user_id});
-    // var playlist_id;
+    // playlist.save();
 
-    playlist.save();
-    playa.playlists.add(playlist);
-    playa.playlists.fetch().done(function(playlists){
-      playa.playlist_id = playlists[playlists.length - 1].id;
-      playa.router.navigate("addsongs", true)  
+    playlist.save().done(function(r){
+        console.log(r);
+        playa.playlists.add(playlist);
+        playa.playlists.fetch().done(function(){
+          var name = playlist.attributes.name;
+          name = name.replace(/ /gi, "-");
+          name = name.toLowerCase();
+          playa.playlist_id = playlist.attributes.id;
+          playa.playlistURL = 'playlists/'+name+'/'+playlist.attributes.id
+          playa.router.navigate("addsongs", true) 
+        });
+
     });
+
+    // playa.playlists.add(playlist);
+    // playa.playlists.fetch().done(function(playlists){
+       
+    //   playa.playlist_id = playlists[playlists.length - 1].id;
+    //   playa.router.navigate("addsongs", true)  
+    // });
 
   }
 

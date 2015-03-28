@@ -8,15 +8,17 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new playlist_params
 
-    respond_to do |format|
       if @playlist.save
-        format.html { redirect_to @playlist, notice: 'Secret was successfully created.' }
-        format.json { render :show, status: :created, location: @playlist}
+        # format.html { redirect_to @playlist, notice: 'Secret was successfully created.' }
+        render :json => @playlist
+        # format.json { render :json, status: :created}
+        # location: @playlist
       else
-        format.html { render :new }
-        format.json { render json: @playlist.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # binding.pry
+        render :json => @playlist.errors, status: :unprocessable_entity
       end
-    end
+    # end
 
   end
 
@@ -25,6 +27,9 @@ class PlaylistsController < ApplicationController
   end
 
   def show
+    playlist = Playlist.find params[:id]
+    render :json => playlist
+    # render :json => playlist, :include => :moments, :methods => :age
   end
 
   def myplaylists
@@ -32,6 +37,8 @@ class PlaylistsController < ApplicationController
     @myplaylists = @current_user.playlists
     render :json => @myplaylists
   end
+
+
 
   private
   def playlist_params

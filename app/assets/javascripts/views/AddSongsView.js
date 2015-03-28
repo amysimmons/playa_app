@@ -9,6 +9,8 @@ playa.AddSongsView = Backbone.View.extend({
   render: function() {
     console.log('showing new songs view')
 
+    $('#main').empty();
+
     var addSongsViewTemplate = $('#addSongsView-template').html();
     var addSongsViewHTML = _.template(addSongsViewTemplate);
     this.$el.html(addSongsViewHTML);

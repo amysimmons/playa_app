@@ -10,7 +10,8 @@ playa.Router = Backbone.Router.extend({
     'newplaylist': 'newplaylist',
     'addsongs': 'addsongs',
     'shareplaylist': 'shareplaylist',
-    'myplaylists': 'myplaylists'
+    'myplaylists': 'myplaylists',
+    'playlists/id': 'playlist'
 
   },
   index: function(){
@@ -44,7 +45,29 @@ playa.Router = Backbone.Router.extend({
   myplaylists: function(){
     var myPlaylistsView = new playa.MyPlaylistsView();
     myPlaylistsView.render();
+  },
+  playlist: function(id){
+    var playlistView = new playa.PlaylistView();
+    playlistView.render();
   }
+
+
+  // viewBook:function(id){
+  //   $('#main').show();
+  //   app.burningFlights.fetch().done(function () {
+  //     var flight = app.burningFlights.get(id); 
+  //     var plane_id = flight.attributes.plane_id; 
+  //     var options = {
+  //       flight: app.burningFlights.get(id), 
+  //       plane_id: flight.attributes.plane_id, 
+  //       plane: app.burningPlanes.get(plane_id) 
+  //     }
+  //     var bookingView = new app.BookingView({model: options});
+  //     bookingView.render(options.plane);
+  //   }); 
+  // }, 
+
+
 
 });
 

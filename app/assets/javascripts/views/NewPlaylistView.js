@@ -6,6 +6,13 @@ playa.NewPlaylistView = Backbone.View.extend({
     "click .new-playlist-btn": 'createNewPlaylist'
   },
 
+  initialize : function(){
+    console.log("initializing view");
+    playa.playlists.on('add', this.render, this);
+    playa.playlists.on('reset', this.render, this);
+    this.render();
+  },
+
   render: function() {
     console.log('showing new playlist form')
     var newPlaylistViewTemplate = $('#newPlaylistView-template').html();
@@ -15,33 +22,20 @@ playa.NewPlaylistView = Backbone.View.extend({
 
   createNewPlaylist: function(event){
     event.preventDefault();
-    var user_id = playa.currentUser.get("id")
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    var user_id = playa.currentUser.get("id");
     var name = $('#name').val();
     var song_limit = $('#song-limit').val();
-    var playlist = new playa.Playlist({name: name, song_limit: song_limit, user_id: user_id})
+    var playlist = new playa.Playlist({name: name, song_limit: song_limit, user_id: user_id});
+    // var playlist_id;
 
     playlist.save();
     playa.playlists.add(playlist);
-    playa.playlists.fetch();
-
-    debugger;
-      // save id in variable here
-
-
-    // var userContent = this.$('textarea').val();
-    // var secret = new whisper.Secret({content: userContent})
-
-
-    // secret.save();
-    // whisper.secrets.add(secret);
-
-    // this.$('textarea').val('');
-
-    // var secretsView = new whisper.SecretsView({collection: whisper.secrets});
-    // secretsView.render();
-
-
-    playa.router.navigate("addsongs", true)  
+    playa.playlists.fetch().done(function(playlists){
+      playa.playlist_id = playlists[playlists.length - 1].id;
+      playa.router.navigate("addsongs", true)  
+    });
 
   }
 

@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   resources :playlists
   resources :songs
   resources :skips
+
+  get 'myplaylists' => 'playlists#myplaylists'
+
 end

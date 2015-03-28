@@ -24,9 +24,18 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new
   end
 
+  def show
+  end
+
+  def myplaylists
+    @current_user = User.find_by :id => session[:user_id]
+    @myplaylists = @current_user.playlists
+    render :json => @myplaylists
+  end
+
   private
   def playlist_params
-      params.permit(:name, :song_limit)
+      params.permit(:name, :song_limit, :user_id)
   end
 
 end

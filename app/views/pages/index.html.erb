@@ -48,7 +48,7 @@
         <ul>
           <li class="nav-link nav-link-username">Username</li>
           <li class="nav-link nav-link-new-playlist">New playlist</li>
-          <li class="nav-link nav-link-my-playlists">My playlists</li>
+          <li class="nav-link nav-link-my-playlists"><a href="#myplaylists">My playlists</a></li>
           <li class="nav-link nav-link-log-out"><a href="logout">Log out</a></li>
         </ul>
       </div>
@@ -111,13 +111,11 @@
   <a href="">View Playlist</a>
 </script>
 
-<script id="myPlaylistsView-template" type="text/x-template">
-  <h2>My playlists</h2> 
-
+<script id="myPlaylistsViewTitle-template" type="text/x-template">
+  <h2>My playlists</h2>
 </script>
 
+<script id="myPlaylistsView-template" type="text/x-template">
+  <h3>{{name}}</h3>
+</script>
 
-<!--     // <div>
-    //   <label for="song_limit">Song limit per guest</label><br> 
-    //   <input id="song_limit" placeholder="Enter a number"></input> 
-    // </div>  -->

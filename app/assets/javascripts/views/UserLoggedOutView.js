@@ -14,6 +14,3 @@ playa.UserLoggedOutView = Backbone.View.extend({
   }
 
 });
-
-
-// userLoggedOutView-template

@@ -26,29 +26,6 @@ playa.UserLoggedInView = Backbone.View.extend({
 
       })
 
-
-
-    // $.ajax({
-    //     url: '/logout',
-    //     type: 'DELETE',
-    //     success: function(result) {
-    //         // Do something with the result
-    //     }
-    // });
-    //   .done(function(user){
-
-    //   // hang on to the user object
-    //   playa.currentUser = new playa.User(user);
-
-    //   var userLoggedOutView = new playa.UserLoggedOutView(playa.currentUser);
-    //   userLoggedOutView.render(); // if this has el: '#main', it will replace the old appView
-
-    //   // debugger
-
-    // })
-
-    // playa.router.navigate("", true)
-
   }
 
 });

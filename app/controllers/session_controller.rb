@@ -2,14 +2,12 @@ class SessionController < ApplicationController
   def new
   end
   def create
-    # binding.pry
     user = User.find_by :username => params["data"]["username"]
     if user.present? && user.authenticate(params["data"]["password"])
         session[:user_id] = user.id
         render :json => user
     else
       # if login is invalid make you go to the error handler
-      binding.pry
       render json: {}, status: 404
     end
   end

@@ -8,7 +8,6 @@ playa.SignupView = Backbone.View.extend({
   },
 
   render: function(){
-    // event.preventDefault();
     console.log('showing signup form')
     var signupViewTemplate = $('#userSignUpView-template').html();
     var signupViewHTML = _.template(signupViewTemplate);
@@ -23,7 +22,6 @@ playa.SignupView = Backbone.View.extend({
     var password = $('#password').val();
     var password_confirmation = $('#password_confirmation').val();
 
-    // debugger;
     var user = new playa.User({username: username,email: email,password: password,password_confirmation: password_confirmation});
     user.save();
 

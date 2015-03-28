@@ -30,7 +30,6 @@ playa.LoginView = Backbone.View.extend({
       var userLoggedInView = new playa.UserLoggedInView(playa.currentUser);
       userLoggedInView.render(); // if this has el: '#main', it will replace the old appView
 
-      // debugger
 
     }).error(function(){
 

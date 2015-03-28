@@ -3,7 +3,7 @@ playa.AddSongsView = Backbone.View.extend({
 
   el: '#main',
   events: {
-    "click .add-songs-btn": 'fetchAPIData'
+    "click .add-songs-btn": 'createSongs'
   },
 
   render: function() {
@@ -14,17 +14,25 @@ playa.AddSongsView = Backbone.View.extend({
     this.$el.html(addSongsViewHTML);
   },
 
-  fetchAPIData: function(event){
+  createSongs: function(event){
     event.preventDefault();
 
-    urls = []
+    var urls = []
+    var playlist_id = x
+    var user_id = playa.currentUser.get("id")
+    var input = $('input')
+    var val = input.val();
 
-    var url1 = $('#url1').val();
-    var url2 = $('#url2').val();
-    var url3 = $('#url3').val();
+    $.each(input, function() {
+      urls.push(val);
+    });
 
-    urls.push(url1, url2, url3);   
-
+    for (var i = 0; i < urls.length; i++) {
+      var url = urls[i]
+      var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id})
+      song.save();
+      playa.songs.add(song);
+    };
  
     for (var i = 0; i < urls.length; i++) {
       url = urls[i]

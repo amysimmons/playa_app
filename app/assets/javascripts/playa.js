@@ -4,4 +4,7 @@ $(document).ready(function(){
   playa.router = new playa.Router();
   Backbone.history.start();
 
+  playa.playlists = new playa.Playlists();
+  playa.songs = new playa.Songs();
+
 });

@@ -11,12 +11,6 @@ playa.MyPlaylistsView = Backbone.View.extend({
     var myPlaylistsViewTemplate = $('#myPlaylistsView-template').html();
     var myPlaylistsViewHTML = _.template(myPlaylistsViewTemplate);
     this.$el.html(myPlaylistsViewHTML);
-  },
-
-  createPlaylist: function(){
-
-    var name = $('#name').val();
-
   }
 
 });

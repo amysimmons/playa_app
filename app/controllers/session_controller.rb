@@ -2,18 +2,20 @@ class SessionController < ApplicationController
   def new
   end
   def create
-    user = User.find_by :username => params[:username]
-    if user.present? && user.authenticate(params[:password])
+    # binding.pry
+    user = User.find_by :username => params["data"]["username"]
+    if user.present? && user.authenticate(params["data"]["password"])
         session[:user_id] = user.id
-        # redirect_to :controller => 'users', :action => 'show_user', :username => user.username
-        redirect_to root_path
+        render :json => user
     else
-        flash[:error] = "Invalid login or password"
-        redirect_to(root_path)
+      # if login is invalid make you go to the error handler
+      binding.pry
+      render json: {}, status: 404
     end
   end
   def destroy
+
     session[:user_id] = nil
-    redirect_to(root_path)
+    render json: {status: 'logged out'}
   end
 end

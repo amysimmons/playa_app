@@ -9,9 +9,9 @@ playa.AppView = Backbone.View.extend({
     // // shove it into the element associated with this view 
     this.$el.html(html);
 
-    // // within the app view render the new secret form 
-    // var newSecretView = new playa.NewSecretView();
-    // newSecretView.render();
+    // // within the app view render the nav
+    // var userLoggedOutView = new playa.UserLoggedOutView();
+    // userLoggedOutView.render();
 
   }
 });

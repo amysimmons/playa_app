@@ -1,26 +1,6 @@
-<header>
-  <h1 class="title">Playa<i class="fa fa-play"></i></h1>
-  <nav>
-    <%if @current_user.present? %>
-      <div class="nav-links">
-        <ul>
-          <li class="nav-link nav-link-username">Username</li>
-          <li class="nav-link nav-link-new-playlist">New playlist</li>
-          <li class="nav-link nav-link-my-playlists">My playlists</li>
-          <li class="nav-link nav-link-log-out">Log out</li>
-        </ul>
-      </div>
-    <%else%>
-      <div class="nav-links">
-        <ul>
-          <li class="nav-link nav-link-log-in"><a href="#login">Log in</a></li>
-          <li class="nav-link nav-link-sign-up"><a href="#signup">Sign up</a></li>
-        </ul>
-      </div>
-    <%end%>
-  </nav>
-</header>
+<div id="header"></div>
 <div id="main"></div>
+<div id="footer"></div>
 
 <script id="userLogInView-template" type="text/x-template">
   <h2>Log in</h2> 
@@ -60,6 +40,36 @@
   </form>  
 </script>
 
+<script id="userLoggedInView-template" type="text/x-template">
+   <header>
+    <h1 class="title">Playa<i class="fa fa-play"></i></h1>
+    <nav>
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link nav-link-username">Username</li>
+          <li class="nav-link nav-link-new-playlist">New playlist</li>
+          <li class="nav-link nav-link-my-playlists">My playlists</li>
+          <li class="nav-link nav-link-log-out"><a href="logout">Log out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</script>
+
+<script id="userLoggedOutView-template" type="text/x-template">
+   <header>
+    <h1 class="title">Playa<i class="fa fa-play"></i></h1>
+    <nav>
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link nav-link-log-in"><a href="#login">Log in</a></li>
+          <li class="nav-link nav-link-sign-up"><a href="#signup">Sign up</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</script>
+
 <script id="newPlaylistView-template" type="text/x-template">
   <h2><span class="step">Step1: </span>Make new playlist</h2> 
   <form> 
@@ -67,6 +77,10 @@
       <label for="name">Name</label><br> 
       <input id="name" placeholder="Enter playlist name"></input> 
     </div> 
+    <div>
+      <label for="song_limit">No. of songs per guest</label><br> 
+      <input id="song-limit" placeholder="Enter song limit"></input> 
+    </div>
     <button class="btn new-playlist-btn">Go!</button> 
   </form>  
 </script>
@@ -76,15 +90,15 @@
   <form> 
     <div>
       <label for="url">Song URL</label><br> 
-      <input id="url" placeholder="https://soundcloud.com/thepreatures/ithyf"></input> 
+      <input id="url1" placeholder="https://soundcloud.com/thepreatures/ithyf"></input> 
     </div> 
     <div>
       <label for="url">Song URL</label><br> 
-      <input id="url" placeholder="https://soundcloud.com/alabamashakes/hold-on"></input> 
+      <input id="url2" placeholder="https://soundcloud.com/alabamashakes/hold-on"></input> 
     </div> 
     <div>
       <label for="url">Song URL</label><br> 
-      <input id="url" placeholder="https://soundcloud.com/asgeirmusic/asgeir-king-and-cross"></input> 
+      <input id="url3" placeholder="https://soundcloud.com/asgeirmusic/asgeir-king-and-cross"></input> 
     </div> 
     <button class="btn add-songs-btn">Go!</button> 
   </form>  

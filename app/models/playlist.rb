@@ -7,6 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer
+#  song_limit :integer
 #
 
 class Playlist < ActiveRecord::Base

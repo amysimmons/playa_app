@@ -17,6 +17,9 @@ playa.Router = Backbone.Router.extend({
     var appView = new playa.AppView();
     appView.render();
 
+    var userLoggedOutView = new playa.UserLoggedOutView();
+    userLoggedOutView.render();
+
   },
   login: function(){
     var loginView = new playa.LoginView();

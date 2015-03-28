@@ -3,7 +3,7 @@ playa.NewPlaylistView = Backbone.View.extend({
 
   el: '#main',
   events: {
-    "click .new-playlist-btn": 'createPlaylist'
+    "click .new-playlist-btn": 'createNewPlaylist'
   },
 
   render: function() {
@@ -13,9 +13,14 @@ playa.NewPlaylistView = Backbone.View.extend({
     this.$el.html(newPlaylistViewHTML);
   },
 
-  createPlaylist: function(){
-
+  createNewPlaylist: function(event){
+    event.preventDefault();
     var name = $('#name').val();
+    var song_limit = $('#song-limit').val();
+    var playlist = new playa.Playlist({name: name, song_limit: song_limit})
+    playlist.save();
+
+    playa.router.navigate("addsongs", true)  
 
   }
 

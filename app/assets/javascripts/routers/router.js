@@ -1,5 +1,15 @@
 var playa = playa || {};
 
+playa.loginNeeded = function () {
+  if (playa.currentUser) {
+    return false; // Nothing to do.
+  } else {
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+      return true;
+  }
+};
+
 playa.Router = Backbone.Router.extend({
 
   routes: {
@@ -21,13 +31,10 @@ playa.Router = Backbone.Router.extend({
     var appView = new playa.AppView();
     appView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
+
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   login: function(){
@@ -37,14 +44,11 @@ playa.Router = Backbone.Router.extend({
     var loginView = new playa.LoginView();
     loginView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
 
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
+  
   },
   signup: function(){
     $('#main').empty();
@@ -52,13 +56,10 @@ playa.Router = Backbone.Router.extend({
     var signupView = new playa.SignupView();
     signupView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
+
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   newplaylist: function(){
@@ -67,13 +68,10 @@ playa.Router = Backbone.Router.extend({
     var newPlaylistView = new playa.NewPlaylistView();
     newPlaylistView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
+
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   addsongs: function(){
@@ -81,14 +79,11 @@ playa.Router = Backbone.Router.extend({
 
     var addSongsView = new playa.AddSongsView();
     addSongsView.render();
+    
+    if (playa.loginNeeded()) return;
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   shareplaylist: function(){
@@ -97,13 +92,10 @@ playa.Router = Backbone.Router.extend({
     var sharePlaylistView = new playa.SharePlaylistView();
     sharePlaylistView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
+
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   myplaylists: function(){
@@ -112,13 +104,10 @@ playa.Router = Backbone.Router.extend({
     var myPlaylistsView = new playa.MyPlaylistsView();
     myPlaylistsView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
+
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
 
   },
   playlist: function(username, playlist_url){
@@ -127,14 +116,10 @@ playa.Router = Backbone.Router.extend({
     var playlistView = new playa.PlaylistView();
     playlistView.render();
 
-    if(playa.currentUser === undefined || playa.currentUser === null){
-      var userLoggedOutView = new playa.UserLoggedOutView();
-      userLoggedOutView.render(); 
-    }else{
-      var userLoggedInView = new playa.UserLoggedInView();
-      userLoggedInView.render(); 
-    }
+    if (playa.loginNeeded()) return;
 
+    var userLoggedInView = new playa.UserLoggedInView();
+    userLoggedInView.render(); 
   }
 
 });

@@ -66,6 +66,8 @@ class SongsController < ApplicationController
 
       # push data into array to render as json
       songs_api_info << embed_info 
+
+      # go and find the song and update the params at this point
     end
     songs_api_info
     #render the api info as json

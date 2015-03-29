@@ -17,7 +17,7 @@ playa.SignupView = Backbone.View.extend({
   userSignUp: function(event){
     console.log('userlogin signup function called')
     event.preventDefault();
-    var username = $('#username').val();
+    var username = $('#username').val().toLowerCase();
     var email = $('#email').val();
     var password = $('#password').val();
     var password_confirmation = $('#password_confirmation').val();

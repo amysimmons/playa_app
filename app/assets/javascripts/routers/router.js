@@ -50,6 +50,14 @@ playa.Router = Backbone.Router.extend({
   playlist: function(username, playlist_url){
     var playlistView = new playa.PlaylistView();
     playlistView.render();
+
+
+  // def playlist
+  //   @current_user = User.find_by :id => session[:user_id]
+  //   @current_user.playlists.find_by(:playlist_url => params[:playlist_url])
+  // end
+
+    
   }
 
 

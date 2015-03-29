@@ -47,6 +47,16 @@ class PlaylistsController < ApplicationController
     render :json => @myplaylists
   end
 
+  def is_playlist_owner
+    current_user = User.find_by :id => session[:user_id]
+    # user = User.find_by(:username => params[:username])
+    playlist_url = current_user.playlists.find_by(:playlist_url => params[:playlist_url])
+
+    r = current_user.playlists.select{|playlist| playlist.playlist_url == playlist_url}
+    r.empty?
+    render :json => r.empty?
+  end
+
   private
   def playlist_params
       params.permit(:name, :song_limit, :user_id, :playlist_url)

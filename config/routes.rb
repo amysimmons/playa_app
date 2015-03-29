@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get '/:username/:playlist_url' => "playlists#show"
 
+  get '/is_playlist_owner' => 'playlists#is_playlist_owner'
+
 end

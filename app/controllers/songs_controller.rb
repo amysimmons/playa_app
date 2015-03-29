@@ -66,13 +66,6 @@ class SongsController < ApplicationController
 
       # push data into array to render as json
       songs_api_info << embed_info 
-
-      # print the html for the player widget
-      # iframe = embed_info['html']
-      # image = embed_info['thumbnail_url']
-      # title = embed_info['title']
-      # author_name = embed_info['author_name']
-
     end
     songs_api_info
     #render the api info as json
@@ -104,7 +97,7 @@ class SongsController < ApplicationController
 
   private
   def song_params
-      params.permit(:url, :title, :artist, :year, :album, :image, :playlist_id, :user_id)
+      params.permit(:url, :title, :artist, :year, :album, :image, :playlist_id, :user_id, :iframe)
   end
 
 end

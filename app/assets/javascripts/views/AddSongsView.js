@@ -55,3 +55,8 @@ playa.AddSongsView = Backbone.View.extend({
   }
 
 });
+
+
+
+// look at the playlist view to see what i did with is_playlist_owner json 
+// do something similar with soundcloud_api_info

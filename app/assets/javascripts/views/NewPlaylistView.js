@@ -42,7 +42,8 @@ playa.NewPlaylistView = Backbone.View.extend({
           name = name.replace(/[^-A-Za-z0-9]+/g, '');
           name = name.toLowerCase();
           playa.playlist_id = playlist.attributes.id;
-          var playlist_url = username+'/'+name;
+          playa.playlist_url = username+'/'+name;
+          var playlist_url = playa.playlist_url;
           playlist.save({playlist_url: playlist_url}).done(function(r){
             console.log(r);
             playa.router.navigate("addsongs", true)
@@ -51,5 +52,4 @@ playa.NewPlaylistView = Backbone.View.extend({
     });
 
   }
-
 });

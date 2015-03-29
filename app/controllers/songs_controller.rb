@@ -8,15 +8,27 @@ class SongsController < ApplicationController
   def create
     @song = Song.new song_params
 
-    respond_to do |format|
       if @song.save
-        # format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render :show, status: :created, location: @playlist}
+        # format.html { redirect_to @playlist, notice: 'Secret was successfully created.' }
+        render :json => @song
+        # format.json { render :json, status: :created}
+        # location: @playlist
       else
         # format.html { render :new }
-        format.json { render json: @playlist.errors, status: :unprocessable_entity }
+        # binding.pry
+        render :json => @song.errors, status: :unprocessable_entity
       end
-    end
+
+
+    # respond_to do |format|
+    #   if @song.save
+    #     # format.html { redirect_to @song, notice: 'Song was successfully created.' }
+    #     format.json { render :show, status: :created, location: @playlist}
+    #   else
+    #     # format.html { render :new }
+    #     format.json { render json: @playlist.errors, status: :unprocessable_entity }
+    #   end
+    # end
 
   end
 

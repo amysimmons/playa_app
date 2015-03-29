@@ -9,11 +9,11 @@ playa.SharePlaylistView = Backbone.View.extend({
   render: function() {
     console.log('showing new playlist form')
 
-    var playlistURL = playa.playlistURL;
+    var playlist_url = playa.playlists.get(playa.playlist_id).attributes.playlist_url;
 
     var sharePlaylistViewTemplate = $('#sharePlaylistView-template').html();
     var sharePlaylistViewHTML = _.template(sharePlaylistViewTemplate);
-    this.$el.html(sharePlaylistViewHTML);
+    this.$el.html(sharePlaylistViewHTML(playa.playlists.get(playa.playlist_id).toJSON()));
   },
 
   goToPlaylist: function(event){

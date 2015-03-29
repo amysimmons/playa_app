@@ -33,25 +33,42 @@ playa.AddSongsView = Backbone.View.extend({
 
     for (var i = 0; i < urls.length; i++) {
       var url = urls[i]
-      var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id})
+
+      SC.initialize({
+          client_id: '42df4f88b96074520cc64f4be69e3ab4'
+        });
+
+      var track_url = url;
+      SC.oEmbed(track_url, { auto_play: true }, function(oEmbed) {
+        console.log('oEmbed response: ' + oEmbed);
+        // soundcloudSongInfo = oEmbed;
+      });
+
+      debugger
+      var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id});
       song.save();
       playa.songs.add(song);
-    };
- 
-    for (var i = 0; i < urls.length; i++) {
-      url = urls[i]
-      if (url.indexOf("soundcloud") >= 0){
-
-      }else if (url.indexOf("youtube") >= 0){
-
-
-      }else if (url.indexOf("spotify") >= 0){
-
-      }
-    };
-
-    playa.router.navigate("shareplaylist", true)
-
+      // });   
+    }
   }
+ 
+
+ // .done(function(){
+ //      playa.router.navigate("shareplaylist", true);
+ //    }),
+    // for (var i = 0; i < urls.length; i++) {
+    //   url = urls[i]
+    //   if (url.indexOf("soundcloud") >= 0){
+
+    //   }else if (url.indexOf("youtube") >= 0){
+
+
+    //   }else if (url.indexOf("spotify") >= 0){
+
+    //   }
+    // };
+
+  
+  // }
 
 });

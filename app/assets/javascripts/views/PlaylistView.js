@@ -53,6 +53,5 @@ playa.PlaylistView = Backbone.View.extend({
     }
   }
     
-  // }
 });
 

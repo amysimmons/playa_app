@@ -32,7 +32,7 @@ class PlaylistsController < ApplicationController
     # render :json => playlist, :include => :moments, :methods => :age
     user = User.find_by(:username => params[:username])
     playlist = user.playlists.find_by(:playlist_url => params[:playlist_url])
-    render :json => playlist
+    render :json => playlist, :include => :users
   end
 
   def update

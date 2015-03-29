@@ -25,31 +25,30 @@ playa.NewPlaylistView = Backbone.View.extend({
     event.stopPropagation();
     event.stopImmediatePropagation();
     var user_id = playa.currentUser.get("id");
+    var username = playa.currentUser.get("username");
     var name = $('#name').val();
     var song_limit = $('#song-limit').val();
     var playlist = new playa.Playlist({name: name, song_limit: song_limit, user_id: user_id});
-    // playlist.save();
 
     playlist.save().done(function(r){
         console.log(r);
         playa.playlists.add(playlist);
         playa.playlists.fetch().done(function(){
+          username = username.toLowerCase();
+          username = username.replace(/ /gi, "-");
+          username = username.replace(/[^-A-Za-z0-9]+/g, '');
           var name = playlist.attributes.name;
           name = name.replace(/ /gi, "-");
+          name = name.replace(/[^-A-Za-z0-9]+/g, '');
           name = name.toLowerCase();
           playa.playlist_id = playlist.attributes.id;
-          playa.playlistURL = 'playlists/'+name+'/'+playlist.attributes.id
-          playa.router.navigate("addsongs", true) 
+          var playlist_url = username+'/'+name;
+          playlist.save({playlist_url: playlist_url}).done(function(r){
+            console.log(r);
+            playa.router.navigate("addsongs", true)
+          });
         });
-
     });
-
-    // playa.playlists.add(playlist);
-    // playa.playlists.fetch().done(function(playlists){
-       
-    //   playa.playlist_id = playlists[playlists.length - 1].id;
-    //   playa.router.navigate("addsongs", true)  
-    // });
 
   }
 

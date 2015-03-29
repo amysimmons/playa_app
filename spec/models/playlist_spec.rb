@@ -2,12 +2,13 @@
 #
 # Table name: playlists
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
-#  song_limit :integer
+#  id           :integer          not null, primary key
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#  song_limit   :integer
+#  playlist_url :text
 #
 
 require 'rails_helper'

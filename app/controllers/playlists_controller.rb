@@ -32,17 +32,21 @@ class PlaylistsController < ApplicationController
     # render :json => playlist, :include => :moments, :methods => :age
   end
 
+  def update
+    playlist = Playlist.find params[:id]
+    playlist.update playlist_params
+    render :json => playlist
+  end
+
   def myplaylists
     @current_user = User.find_by :id => session[:user_id]
     @myplaylists = @current_user.playlists
     render :json => @myplaylists
   end
 
-
-
   private
   def playlist_params
-      params.permit(:name, :song_limit, :user_id)
+      params.permit(:name, :song_limit, :user_id, :playlist_url)
   end
 
 end

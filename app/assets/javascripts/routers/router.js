@@ -3,7 +3,8 @@ var playa = playa || {};
 playa.Router = Backbone.Router.extend({
 
   routes: {
-    // as soon as i load the page, look at the index, and run the index function
+    // as soon as i load the page, look at the index, 
+    // and run the index function
     '': 'index',
     'login': 'login',
     'signup': 'signup',
@@ -11,72 +12,130 @@ playa.Router = Backbone.Router.extend({
     'addsongs': 'addsongs',
     'shareplaylist': 'shareplaylist',
     'myplaylists': 'myplaylists',
-    // 'playlists/id': 'playlist',
     ':username/:playlist_url': 'playlist'
-
   },
+
   index: function(){
+    $('#main').empty();
+
     var appView = new playa.AppView();
     appView.render();
 
-    var userLoggedOutView = new playa.UserLoggedOutView();
-    userLoggedOutView.render();
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
 
   },
   login: function(){
+
+    $('#main').empty();
+
     var loginView = new playa.LoginView();
     loginView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   signup: function(){
+    $('#main').empty();
+
     var signupView = new playa.SignupView();
     signupView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   newplaylist: function(){
+    $('#main').empty();
+
     var newPlaylistView = new playa.NewPlaylistView();
     newPlaylistView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   addsongs: function(){
+    $('#main').empty();
+
     var addSongsView = new playa.AddSongsView();
     addSongsView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   shareplaylist: function(){
+    $('#main').empty();
+
     var sharePlaylistView = new playa.SharePlaylistView();
     sharePlaylistView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   myplaylists: function(){
+    $('#main').empty();
+
     var myPlaylistsView = new playa.MyPlaylistsView();
     myPlaylistsView.render();
+
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
+
   },
   playlist: function(username, playlist_url){
+    $('#main').empty();
+    
     var playlistView = new playa.PlaylistView();
     playlistView.render();
 
+    if(playa.currentUser === undefined || playa.currentUser === null){
+      var userLoggedOutView = new playa.UserLoggedOutView();
+      userLoggedOutView.render(); 
+    }else{
+      var userLoggedInView = new playa.UserLoggedInView();
+      userLoggedInView.render(); 
+    }
 
-  // def playlist
-  //   @current_user = User.find_by :id => session[:user_id]
-  //   @current_user.playlists.find_by(:playlist_url => params[:playlist_url])
-  // end
-
-    
   }
-
-
-  // viewBook:function(id){
-  //   $('#main').show();
-  //   app.burningFlights.fetch().done(function () {
-  //     var flight = app.burningFlights.get(id); 
-  //     var plane_id = flight.attributes.plane_id; 
-  //     var options = {
-  //       flight: app.burningFlights.get(id), 
-  //       plane_id: flight.attributes.plane_id, 
-  //       plane: app.burningPlanes.get(plane_id) 
-  //     }
-  //     var bookingView = new app.BookingView({model: options});
-  //     bookingView.render(options.plane);
-  //   }); 
-  // }, 
-
-
 
 });
 

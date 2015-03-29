@@ -7,11 +7,11 @@
   <form> 
     <div>
       <label for="username">Username</label><br> 
-      <input id="username" placeholder="Enter your username"></input> 
+      <input id="username" placeholder="Enter your username" required></input> 
     </div> 
     <div>
       <label for="password">Password</label><br>
-      <input id="password" type="password" placeholder="Enter your password"></input> 
+      <input id="password" type="password" placeholder="Enter your password" required></input> 
     </div> 
     <button class="btn log-in-btn">Log in</button> 
   </form>  
@@ -22,19 +22,19 @@
   <form> 
     <div>
       <label for="username">Username</label><br> 
-      <input id="username" placeholder="Enter your username"></input> 
+      <input id="username" pattern=".{5,15}" placeholder="Enter your username" required></input> 
     </div> 
     <div>
       <label for="email">Email</label><br> 
-      <input id="email" placeholder="Enter your email"></input> 
+      <input id="email" placeholder="Enter your email" required></input> 
     </div> 
     <div>
       <label for="password">Password</label><br>
-      <input id="password" type="password" placeholder="Enter your password"></input> 
+      <input id="password" type="password" placeholder="Enter your password" required></input> 
     </div> 
     <div>
       <label for="password_confirmation">Password Confirmation</label><br>
-      <input id="password_confirmation" type="password" placeholder="Confirm password"></input>
+      <input id="password_confirmation" type="password" placeholder="Confirm password" required></input>
     </div> 
     <button class="btn sign-up-btn">Sign up</button> 
   </form>  
@@ -107,8 +107,8 @@
 
 <script id="sharePlaylistView-template" type="text/x-template">
   <h2><span class="step">Step3: </span>Share playlist</h2> 
-  <p>Your playlist URL is: <a href="#{{playlist_url}}">{{playlist_url}}</a></p>
-  <a href="" class="go-to-playlist">View Playlist</a>
+  <p>Your playlist URL is: <a href="#{{user.username}}/{{playlist.playlist_url}}">www.playa-app.herokuapp.com/#{{user.username}}/{{playlist.playlist_url}}</a></p>
+  <a href="#{{user.username}}/{{playlist.playlist_url}}" class="go-to-playlist">View Playlist</a>
 </script>
 
 <script id="myPlaylistsViewTitle-template" type="text/x-template">
@@ -116,7 +116,7 @@
 </script>
 
 <script id="myPlaylistsView-template" type="text/x-template">
-  <h3>{{name}}</h3>
+  <a href="#{{user.username}}/{{playlist_url.playlist_url}}"><h3>{{playlist_url.name}}</h3></a>
 </script>
 
 <script id="playlistOwnerView-template" type="text/x-template">

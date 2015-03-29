@@ -23,11 +23,10 @@ playa.SignupView = Backbone.View.extend({
     var password_confirmation = $('#password_confirmation').val();
 
     var user = new playa.User({username: username,email: email,password: password,password_confirmation: password_confirmation});
-    user.save();
+    user.save().done(function(){
+      playa.router.navigate("newplaylist", true)
 
-    playa.router.navigate("newplaylist", true)
-
+    });
   }
  // listen for the submit buttons and send data to server 
-
 });

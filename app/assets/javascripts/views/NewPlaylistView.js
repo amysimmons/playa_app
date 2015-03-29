@@ -34,15 +34,15 @@ playa.NewPlaylistView = Backbone.View.extend({
         console.log(r);
         playa.playlists.add(playlist);
         playa.playlists.fetch().done(function(){
-          username = username.toLowerCase();
-          username = username.replace(/ /gi, "-");
-          username = username.replace(/[^-A-Za-z0-9]+/g, '');
+          // username = username.toLowerCase();
+          // username = username.replace(/ /gi, "-");
+          // username = username.replace(/[^-A-Za-z0-9]+/g, '');
           var name = playlist.attributes.name;
           name = name.replace(/ /gi, "-");
           name = name.replace(/[^-A-Za-z0-9]+/g, '');
           name = name.toLowerCase();
           playa.playlist_id = playlist.attributes.id;
-          playa.playlist_url = username+'/'+name;
+          playa.playlist_url = name;
           var playlist_url = playa.playlist_url;
           playlist.save({playlist_url: playlist_url}).done(function(r){
             console.log(r);

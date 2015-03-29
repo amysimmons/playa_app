@@ -11,7 +11,8 @@ playa.Router = Backbone.Router.extend({
     'addsongs': 'addsongs',
     'shareplaylist': 'shareplaylist',
     'myplaylists': 'myplaylists',
-    'playlists/id': 'playlist'
+    // 'playlists/id': 'playlist',
+    ':username/:playlist_url': 'playlist'
 
   },
   index: function(){
@@ -46,7 +47,7 @@ playa.Router = Backbone.Router.extend({
     var myPlaylistsView = new playa.MyPlaylistsView();
     myPlaylistsView.render();
   },
-  playlist: function(id){
+  playlist: function(username, playlist_url){
     var playlistView = new playa.PlaylistView();
     playlistView.render();
   }

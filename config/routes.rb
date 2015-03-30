@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   root :to => 'pages#index'
 
-  get '/:username/:playlist_url' => "playlists#show"
-
   resources :users
   resources :playlists, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :songs 
@@ -16,11 +14,13 @@ Rails.application.routes.draw do
 
   get '/is_playlist_owner' => 'playlists#is_playlist_owner'
 
+  get '/:username/:playlist_url' => "playlists#show"
+
+  get '/:username/:playlist_url/shuffle_songs' => 'playlists#playlist_songs'
+
   get '/playlist_contributor_count' => 'playlists#playlist_contributor_count'
 
-  get '/playlist_songs' => 'playlists#playlist_songs'
-
-  get '/shuffle_songs' => 'playlists#shuffle_songs'
+  # get '/shuffle' => 'playlists#shuffle_songs'
 
   get '/current_song_chosen_by' => 'playlists#current_song_chosen_by'
 

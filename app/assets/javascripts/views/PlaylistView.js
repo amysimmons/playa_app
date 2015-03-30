@@ -3,7 +3,7 @@ playa.PlaylistView = Backbone.View.extend({
 
   el: '#main',
   events: {
-    // "click .new-playlist-btn": 'createNewPlaylist'
+    "click .shuffle": 'shuffleSongs'
   },
 
   render: function(name, url) {
@@ -15,6 +15,7 @@ playa.PlaylistView = Backbone.View.extend({
       playa.currentPlaylist = playa.playlists.where({playlist_url: url});
       playa.creatorName = name
       playa.currentSongChosenBy = playa.currentPlaylist[0].attributes.user_id
+      playa.playlist_url = url
 
       // var songChosenBy = 
 
@@ -51,9 +52,17 @@ playa.PlaylistView = Backbone.View.extend({
       var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
       $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
 
+
+      var playerOptions = {
+
+        creator_name: playa.creatorName,
+        playlist_url: playa.playlist_url
+       
+      }
+
       var playerViewTemplate = $('#playerView-template').html();
       var playerViewHTML = _.template(playerViewTemplate);
-      $('.playler-container').html(playerViewHTML);
+      $('.player-container').html(playerViewHTML(playerOptions));
 
        var songStatsOptions = {
           // song_info: playa.songs.toJSON()[i],
@@ -96,6 +105,11 @@ playa.PlaylistView = Backbone.View.extend({
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
       this.$el.html(playlistGuestViewHTML);
     }
+  },
+
+  shuffleSongs: function(event){
+    event.preventDefault();
+    console.log('shuffling');
   }
     
 });

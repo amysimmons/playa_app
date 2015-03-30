@@ -23,4 +23,6 @@ class Song < ActiveRecord::Base
   has_many :skips
   belongs_to :user
   belongs_to :playlist
+
+  validates :url, :presence => true
 end

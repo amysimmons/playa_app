@@ -1,7 +1,6 @@
 class PlaylistsController < ApplicationController
 
   def index
-    # binding.pry
     @playlists = Playlist.all
     render :json => @playlists
   end
@@ -10,17 +9,10 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new playlist_params
 
       if @playlist.save
-        # format.html { redirect_to @playlist, notice: 'Secret was successfully created.' }
         render :json => @playlist
-        # format.json { render :json, status: :created}
-        # location: @playlist
       else
-        # format.html { render :new }
-        # binding.pry
         render :json => @playlist.errors, status: :unprocessable_entity
       end
-    # end
-
   end
 
   def new
@@ -28,9 +20,6 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    # playlist = Playlist.find_by :playlist_url => params[:playlist_url]
-    # render :json => playlist
-    # render :json => playlist, :include => :moments, :methods => :age
     user = User.find_by(:username => params[:username])
     playlist = user.playlists.find_by(:playlist_url => params[:playlist_url])
     render :json => playlist
@@ -50,9 +39,7 @@ class PlaylistsController < ApplicationController
 
   def is_playlist_owner
     current_user = User.find_by :id => session[:user_id]
-    # user = User.find_by(:username => params[:username])
     playlist_url = current_user.playlists.find_by(:playlist_url => params[:playlist_url])
-
     r = current_user.playlists.select{|playlist| playlist.playlist_url == playlist_url}
     r.empty?
     render :json => r.empty?
@@ -61,8 +48,25 @@ class PlaylistsController < ApplicationController
   def playlist_contributor_count
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     count = playlist.songs.map{|song|song.user_id}.uniq.count
-    # binding.pry
     render :json => count
+  end
+
+  def playlist_songs
+    playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
+    shuffled_songs = playlist.songs.shuffle
+    render :json => shuffled_songs
+  end
+
+  def shuffle_songs
+    playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
+    shuffled_songs = playlist.songs.shuffle
+    render :json => shuffled_songs
+  end
+
+  def current_song_chosen_by
+    playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
+    first_song_chosen_by = playlist.songs[0].user.username
+    render :json => first_song_chosen_by
   end
 
   private

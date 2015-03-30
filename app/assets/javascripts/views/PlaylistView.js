@@ -14,6 +14,9 @@ playa.PlaylistView = Backbone.View.extend({
 
       playa.currentPlaylist = playa.playlists.where({playlist_url: url});
       playa.creatorName = name
+      playa.currentSongChosenBy = playa.currentPlaylist[0].attributes.user_id
+
+      // var songChosenBy = 
 
       var contributors = $.get('/playlist_contributor_count').done(function(){ 
         playa.currentPlaylistContributors = contributors.responseText;

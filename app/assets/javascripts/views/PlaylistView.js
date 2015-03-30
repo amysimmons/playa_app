@@ -6,25 +6,26 @@ playa.PlaylistView = Backbone.View.extend({
     // "click .new-playlist-btn": 'createNewPlaylist'
   },
 
-  render: function(url) {
+  render: function(name, url) {
     view = this;
     console.log('showingplaylist view!!!!')
 
     playa.playlists.fetch().done(function(){
 
-
       playa.currentPlaylist = playa.playlists.where({playlist_url: url});
-      var contributors = $.get('/playlist_contributor_count').done(function(){
-        
-        playa.currentPlaylistContributors = contributors.responseText
-        // debugger 
+      playa.creatorName = name
+
+      var contributors = $.get('/playlist_contributor_count').done(function(){ 
+        playa.currentPlaylistContributors = contributors.responseText;
+      }).done(function(){
+
+        // if user is logged in and user owns the playlist show the playlist owner view
+        var isOwnerOfPlaylist = $.get('/is_playlist_owner').done(function(){
+          view.showView(isOwnerOfPlaylist);
+        });
+
       });
-        
-      // if user is logged in and user owns the playlist show the playlist owner view
-      var isOwnerOfPlaylist = $.get('/is_playlist_owner').done(function(){
-        // debugger
-        view.showView(isOwnerOfPlaylist);
-      });
+
     });
   },
 
@@ -37,11 +38,12 @@ playa.PlaylistView = Backbone.View.extend({
       this.$el.html(playlistOwnerViewHTML);
 
       var playlistStatsOptions = {
-          playlistInfo: playa.currentPlaylist,
-          contributor_count: playa.currentPlaylistContributors
-
+        playlist_name: playa.currentPlaylist[0].attributes.name,
+        contributor_count: playa.currentPlaylistContributors,
+        creator_name: playa.creatorName
+       
       }
-    
+
       var playlistStatsViewTemplate = $('#playlistStatsView-template').html();
       var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
       $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));

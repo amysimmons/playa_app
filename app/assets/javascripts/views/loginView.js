@@ -44,9 +44,3 @@ playa.LoginView = Backbone.View.extend({
   }
 
 });
-
-
-
-
-
-

@@ -151,7 +151,10 @@
   <div class="song-view">
     <div class="song-count"></div>
     <img class="song-image" src="{{song_info.image}}"/>
-    <div class="skip">Vote to skip</div>
+    <form action="/skips">
+      <input class="hide skipped" type="submit" value=true><input>
+      <button class="skip btn">Vote to skip</button>
+    </form>
   </div>
 </script>
 

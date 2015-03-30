@@ -3,7 +3,8 @@ playa.PlaylistView = Backbone.View.extend({
 
   el: '#main',
   events: {
-    "click .shuffle": 'shuffleSongs'
+    "click .shuffle": 'shuffleSongs',
+    "submit form": 'createNewSongSkip'
   },
 
   render: function(name, url) {
@@ -110,10 +111,100 @@ playa.PlaylistView = Backbone.View.extend({
   shuffleSongs: function(event){
     event.preventDefault();
     console.log('shuffling');
+  },
+
+  createNewSongSkip: function(event){
+    event.preventDefault();
+    console.log('skipping');
+    var user_id = playa.currentUser.id
+    var song_id = 380;
+    var is_skipped = true;
+    var skip = new playa.Skip({user_id: user_id, song_id: song_id, is_skipped: is_skipped})
+    skip.save().done(function(){
+      playa.skips.add(skip);
+    });
   }
-    
 });
 
+//   createNewSecret: function(event){
+//     event.preventDefault();
+//     var userContent = this.$('textarea').val();
+//     var secret = new whisper.Secret({content: userContent})
+
+
+//     secret.save();
+//     whisper.secrets.add(secret);
+
+//     this.$('textarea').val('');
+
+//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
+//     secretsView.render();
+
+//   },
+
+  // createSongs: function(event){
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   event.stopImmediatePropagation();
+
+  //   var urls = []
+  //   var playlist_id = playa.playlist_id
+  //   var user_id = playa.currentUser.get("id");
+  //   var input = $('input');
+
+  //   $.each(input, function() {
+  //     var val = $(this).val();
+  //     urls.push(val);
+  //   });
+
+  //   for (var i = 0; i < urls.length; i++) {
+  //     var url = urls[i]
+  //     var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id})
+  //     song.save().done(function(){
+  //       playa.songs.add(song);
+  //     });
+  //   }
+  //   playa.router.navigate("shareplaylist", true)
+  // }
+
+
+// whisper.NewSecretView = Backbone.View.extend({
+//   el:'#new-secret',
+//   events: {
+//     'submit form': 'createNewSecret',
+//     'click button': 'stopPolling'
+//   },
+//   render: function(){
+//     // make the view available
+//     var html = $('#newSecretTemplate').html();
+//     this.$el.html(html);
+//   },
+//   createNewSecret: function(event){
+//     event.preventDefault();
+//     var userContent = this.$('textarea').val();
+//     var secret = new whisper.Secret({content: userContent})
+
+
+//     secret.save();
+//     whisper.secrets.add(secret);
+
+//     this.$('textarea').val('');
+
+//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
+//     secretsView.render();
+
+//   },
+//   stopPolling: function(event){
+//     event.preventDefault();
+//     whisper.secrets.stop();
+//   }
+
+// });
+
+
+// maybe i need to do somehitn glike this after i shuffle the songs?
+//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
+//     secretsView.render();
 
 
 

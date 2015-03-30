@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :playlists, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :songs 
-  resources :skips, only: [:index]
+  resources :skips, only: [:index, :new, :create]
 
   get '/myplaylists' => 'playlists#myplaylists'
 

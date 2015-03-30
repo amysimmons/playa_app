@@ -8,6 +8,7 @@ $(document).ready(function(){
   playa.songs = new playa.Songs();
   playa.myplaylists = new playa.Myplaylists();
   playa.users = new playa.Users();
+  playa.skips = new playa.Skips();
 
   // create new instance of the class
   playa.router = new playa.Router();

@@ -1,8 +1,21 @@
-class SongsController < ApplicationController
+class SkipsController < ApplicationController
 
   def index
-    skips = Skip.all
-    render :json => skips
+    @skips = Skip.all
+    render :json => @skips
+  end
+
+  def create
+    @skip = Skip.new skip_params
+    if @skip.save
+      render :json => @skip
+    else
+      render :json => @skip.errors, status: :unprocessable_entity
+    end
+  end
+
+  def new
+    @skip = Skip.new
   end
 
   def skips_on_song
@@ -16,7 +29,7 @@ class SongsController < ApplicationController
     # calculates percenate of users who have skipped the song
     skips_percentage = (skips_num/count.to_f)*100
 
-    render :json => skips_num, skips_percentage
+    render :json => skips_percentage
   end
 
   def skips_on_user
@@ -28,6 +41,11 @@ class SongsController < ApplicationController
     skips_percentage = (skips_num/songs_num.to_f)*100
 
     render :json => skips_percentage
+  end
+
+  private
+  def skip_params
+      params.permit(:song_id, :user_id, :is_skipped)
   end
 
 end

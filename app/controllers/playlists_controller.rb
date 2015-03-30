@@ -58,6 +58,13 @@ class PlaylistsController < ApplicationController
     render :json => r.empty?
   end
 
+  def playlist_contributor_count
+    playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
+    count = playlist.songs.map{|song|song.user_id}.uniq.count
+    # binding.pry
+    render :json => count
+  end
+
   private
   def playlist_params
       params.permit(:name, :song_limit, :user_id, :playlist_url)

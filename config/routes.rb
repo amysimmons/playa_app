@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   get '/is_playlist_owner' => 'playlists#is_playlist_owner'
 
+  get '/playlist_contributor_count' => 'playlists#playlist_contributor_count'
+
 end

@@ -25,38 +25,50 @@ playa.AddSongsView = Backbone.View.extend({
     var playlist_id = playa.playlist_id
     var user_id = playa.currentUser.get("id");
     var input = $('input');
-    var val = input.val();
 
     $.each(input, function() {
+      var val = $(this).val();
       urls.push(val);
     });
 
     for (var i = 0; i < urls.length; i++) {
       var url = urls[i]
       var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id})
-      song.save();
-      playa.songs.add(song);
-    };
- 
-    for (var i = 0; i < urls.length; i++) {
-      url = urls[i]
-      if (url.indexOf("soundcloud") >= 0){
-
-      }else if (url.indexOf("youtube") >= 0){
-
-
-      }else if (url.indexOf("spotify") >= 0){
-
-      }
-    };
-
+      song.save().done(function(){
+        playa.songs.add(song);
+      });
+    }
     playa.router.navigate("shareplaylist", true)
-
   }
-
 });
 
+// s2 = Song.create(:url => 'https://soundcloud.com/thepreatures/ithyf')
+// s3 = Song.create(:url => 'https://soundcloud.com/jules575-profile/of-monsters-and-men-love-love')
+// s4 = Song.create(:url => 'https://soundcloud.com/ladyrosa/tracy-chapman-fast-car')
+// s5 = Song.create(:url => 'https://soundcloud.com/markronson/uptown-funk-benji-b-disco-dub-mix')
+// s6 = Song.create(:url => 'https://soundcloud.com/alabamashakes/youaintalone')
+// s7 = Song.create(:url => 'https://soundcloud.com/alabamashakes/hold-on')
+// s8 = Song.create(:url => 'https://soundcloud.com/jamiroquai/canned-heat')
+// s9 = Song.create(:url => 'https://soundcloud.com/gotye/4-eyes-wide-open')
+// s10 = Song.create(:url => 'https://soundcloud.com/vancejoy/02-riptide')
+// s11 = Song.create(:url => 'https://soundcloud.com/asgeirmusic/asgeir-torrent')
+// s12 = Song.create(:url => 'https://soundcloud.com/asgeirmusic/asgeir-king-and-cross')
+// s13 = Song.create(:url => 'https://soundcloud.com/poppyhenri/deee-lite-groove-is-in-the-heart')
+// s14 = Song.create(:url => 'https://soundcloud.com/robyn/dancing-on-my-own')
+// s15 = Song.create(:url => 'https://soundcloud.com/robyn/call-your-girlfriend')
 
 
 // look at the playlist view to see what i did with is_playlist_owner json 
 // do something similar with soundcloud_api_info
+
+    // for (var i = 0; i < urls.length; i++) {
+    //   url = urls[i]
+    //   if (url.indexOf("soundcloud") >= 0){
+
+    //   }else if (url.indexOf("youtube") >= 0){
+
+
+    //   }else if (url.indexOf("spotify") >= 0){
+
+    //   }
+    // };

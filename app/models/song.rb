@@ -14,6 +14,9 @@
 #  updated_at  :datetime         not null
 #  image       :text
 #  iframe      :text
+#  track_id    :string
+#  duration    :integer
+#  uri         :text
 #
 
 class Song < ActiveRecord::Base

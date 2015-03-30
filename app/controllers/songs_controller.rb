@@ -48,30 +48,34 @@ class SongsController < ApplicationController
     #select all songs with soundcloud in the url
     songs = Song.all
     soundcloud_songs = songs.select{|song| song.url.include? "soundcloud"}
-
-    #create an empty array for the soundcloud api info
-    songs_api_info = []
-
     #iterate through all of my soundcloud songs and retreive the api info
     #push the info to my array
     soundcloud_songs.each do |song|
       url = song.url
-
        # create a client object with your app credentials
       client = Soundcloud.new(:client_id => '42df4f88b96074520cc64f4be69e3ab4')
-
-      # get a tracks oembed data
+      # a permalink to a track
       track_url = url
+      # resolve track URL into track resource
+      track = client.get('/resolve', :url => track_url)
+      #get track id, duration and uri
+      track_id = track['id']
+      duration = track['duration']
+      uri = track['uri']
+      # get the track's oembed data
       embed_info = client.get('/oembed', :url => track_url)
-
-      # push data into array to render as json
-      songs_api_info << embed_info 
-
-      # go and find the song and update the params at this point
+      # hold onto song attributes
+      title = embed_info['title']
+      thumbnail_url = embed_info['thumbnail_url']
+      iframe = embed_info['html']
+      author_name = embed_info['author_name']
+      # update song params with api data
+      song.update(:title => title, :artist => author_name, :image => thumbnail_url, :iframe => iframe, :track_id => track_id, :duration => duration, :uri => uri)
     end
-    songs_api_info
-    #render the api info as json
-    render :json => songs_api_info
+    # return soundcloud_songs
+    soundcloud_songs
+    # render songs as json
+    render :json => songs
   end
 
   def youtube
@@ -99,7 +103,7 @@ class SongsController < ApplicationController
 
   private
   def song_params
-      params.permit(:url, :title, :artist, :year, :album, :image, :playlist_id, :user_id, :iframe)
+      params.permit(:url, :title, :artist, :year, :album, :image, :playlist_id, :user_id, :iframe, :track_id, :duration, :uri)
   end
 
 end

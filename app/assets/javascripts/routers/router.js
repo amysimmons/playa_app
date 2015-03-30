@@ -28,13 +28,14 @@ playa.Router = Backbone.Router.extend({
   index: function(){
     $('#main').empty();
 
-    var appView = new playa.AppView();
-    appView.render();
-
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+
+    var appView = new playa.AppView();
+    appView.render();
+
 
   },
   login: function(){
@@ -48,6 +49,7 @@ playa.Router = Backbone.Router.extend({
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+
   
   },
   signup: function(){
@@ -65,37 +67,37 @@ playa.Router = Backbone.Router.extend({
   newplaylist: function(){
     $('#main').empty();
 
-    var newPlaylistView = new playa.NewPlaylistView();
-    newPlaylistView.render();
-
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+
+    var newPlaylistView = new playa.NewPlaylistView();
+    newPlaylistView.render();
 
   },
   addsongs: function(){
     $('#main').empty();
 
-    var addSongsView = new playa.AddSongsView();
-    addSongsView.render();
-    
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
-    userLoggedInView.render(); 
+    userLoggedInView.render();
 
+    var addSongsView = new playa.AddSongsView();
+    addSongsView.render();
+ 
   },
   shareplaylist: function(){
     $('#main').empty();
 
-    var sharePlaylistView = new playa.SharePlaylistView();
-    sharePlaylistView.render();
-
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+
+    var sharePlaylistView = new playa.SharePlaylistView();
+    sharePlaylistView.render();
 
   },
   myplaylists: function(){
@@ -109,18 +111,23 @@ playa.Router = Backbone.Router.extend({
     var myPlaylistsView = new playa.MyPlaylistsView();
     myPlaylistsView.render();
 
-
   },
   playlist: function(username, playlist_url){
     $('#main').empty();
-    
-    var playlistView = new playa.PlaylistView();
-    playlistView.render();
 
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+    // debugger
+    // find the playlist currently on page
+    // var playlist = playa.playlists.where({playlist_url: playlist_url});
+
+    // pass the playlist model into the view
+    // debugger
+    var playlistView = new playa.PlaylistView();
+    playlistView.render(playlist_url);
+
   }
 
 });

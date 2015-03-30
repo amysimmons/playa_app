@@ -17,6 +17,4 @@ Rails.application.routes.draw do
 
   get '/is_playlist_owner' => 'playlists#is_playlist_owner'
 
-  get '/soundcloud_api_info' => 'songs#soundcloud'
-
 end

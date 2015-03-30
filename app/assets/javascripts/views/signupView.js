@@ -17,16 +17,34 @@ playa.SignupView = Backbone.View.extend({
   userSignUp: function(event){
     console.log('userlogin signup function called')
     event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     var username = $('#username').val().toLowerCase();
     var email = $('#email').val();
     var password = $('#password').val();
     var password_confirmation = $('#password_confirmation').val();
 
     var user = new playa.User({username: username,email: email,password: password,password_confirmation: password_confirmation});
-    user.save().done(function(){
+    user.save().done(function(user){
+debugger;
+      console.log('user saved');
+
+      // hang on to the user object
+      playa.currentUser = new playa.User(user); 
+      // #render the user logged in nav 
+      var userLoggedInView = new playa.UserLoggedInView(playa.currentUser);
+      userLoggedInView.render(); // if this has el: '#main', it will replace the old appView
+
       playa.router.navigate("newplaylist", true)
 
+
+    }).error(function(){
+
+     // leave form on page and prepend an error msg to main 
+      var errorMsg = $('<p>Something went wrong</p>');
+      $('form').prepend(errorMsg);
+
     });
+
   }
- // listen for the submit buttons and send data to server 
 });

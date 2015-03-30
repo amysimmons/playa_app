@@ -10,6 +10,9 @@ class SongsController < ApplicationController
 
       if @song.save
         # format.html { redirect_to @playlist, notice: 'Secret was successfully created.' }
+
+        # update song with soundcloud api info
+        update_soundcloud
         render :json => @song
         # format.json { render :json, status: :created}
         # location: @playlist
@@ -44,7 +47,33 @@ class SongsController < ApplicationController
     render :json => song
   end
 
-  def soundcloud
+
+
+  def youtube
+    songs = Song.all
+    youtube_songs = songs.select{|song| song.url.include? "youtube"}
+    # // http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-UUx10KOWIE&format=xml
+
+    # // resource = OEmbed::Providers::Youtube.get("http://www.youtube.com/watch?v=2BYXBC8WQ5k")
+    # // resource.video? #=> true
+    # // resource.thumbnail_url #=> "http://i3.ytimg.com/vi/2BYXBC8WQ5k/hqdefault.jpg"
+    # // resource.html #=> <<-HTML
+    # // <object width="425" height="344">
+    # // <param name="movie" value="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1"></param>
+    # // <param name="allowFullScreen" value="true"></param>
+    # // <param name="allowscriptaccess" value="always"></param>
+    # // <embed src="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1" type="application/x-shockwave-flash" width="425" height="344" allowscriptaccess="always" allowfullscreen="true"></embed>
+    # // </object>
+    # // HTML
+  end
+
+  def spotify
+    songs = Song.all
+    spotify_songs = songs.select{|song| song.url.include? "spotify"}
+  end
+
+  private
+  def update_soundcloud
     #select all songs with soundcloud in the url
     songs = Song.all
     soundcloud_songs = songs.select{|song| song.url.include? "soundcloud"}
@@ -72,36 +101,9 @@ class SongsController < ApplicationController
       # update song params with api data
       song.update(:title => title, :artist => author_name, :image => thumbnail_url, :iframe => iframe, :track_id => track_id, :duration => duration, :uri => uri)
     end
-    # return soundcloud_songs
-    soundcloud_songs
-    # render songs as json
-    render :json => songs
   end
 
-  def youtube
-    songs = Song.all
-    youtube_songs = songs.select{|song| song.url.include? "youtube"}
-    # // http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-UUx10KOWIE&format=xml
 
-    # // resource = OEmbed::Providers::Youtube.get("http://www.youtube.com/watch?v=2BYXBC8WQ5k")
-    # // resource.video? #=> true
-    # // resource.thumbnail_url #=> "http://i3.ytimg.com/vi/2BYXBC8WQ5k/hqdefault.jpg"
-    # // resource.html #=> <<-HTML
-    # // <object width="425" height="344">
-    # // <param name="movie" value="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1"></param>
-    # // <param name="allowFullScreen" value="true"></param>
-    # // <param name="allowscriptaccess" value="always"></param>
-    # // <embed src="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1" type="application/x-shockwave-flash" width="425" height="344" allowscriptaccess="always" allowfullscreen="true"></embed>
-    # // </object>
-    # // HTML
-  end
-
-  def spotify
-    songs = Song.all
-    spotify_songs = songs.select{|song| song.url.include? "spotify"}
-  end
-
-  private
   def song_params
       params.permit(:url, :title, :artist, :year, :album, :image, :playlist_id, :user_id, :iframe, :track_id, :duration, :uri)
   end

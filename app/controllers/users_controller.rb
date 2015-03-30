@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save  
         session[:user_id] = @user.id
         # redirect_to :controller => 'users', :action => 'show_user', :username => @user.username
-        redirect_to root_path
+        render json: @user
     else
         render json: {}, status: 404
     end

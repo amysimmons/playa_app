@@ -101,13 +101,14 @@ playa.Router = Backbone.Router.extend({
   myplaylists: function(){
     $('#main').empty();
 
-    var myPlaylistsView = new playa.MyPlaylistsView();
-    myPlaylistsView.render();
-
     if (playa.loginNeeded()) return;
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
+
+    var myPlaylistsView = new playa.MyPlaylistsView();
+    myPlaylistsView.render();
+
 
   },
   playlist: function(username, playlist_url){

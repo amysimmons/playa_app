@@ -15,7 +15,7 @@
 <% if @current_user.present? %>
 <script>
 var playa = playa || {};
-playa.currentUser = <%== @current_user.to_json %>;
+playa.currentUser = new playa.User(<%== @current_user.to_json %>);
 </script>
 <% end %>
 </html>

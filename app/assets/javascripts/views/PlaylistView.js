@@ -9,7 +9,6 @@ playa.initWidget = function () {
     playa.widget.play();   
   });
 
-
   playa.widget.bind(SC.Widget.Events.FINISH, function(player, data) {
     console.log('finished');
     playa.playlistView.playNextTrack();      
@@ -37,7 +36,9 @@ playa.PlaylistView = Backbone.View.extend({
       playa.currentSongChosenBy = playa.currentPlaylist[0].attributes.user_id
       playa.playlist_url = url
 
-      var contributors = $.get('/playlist_contributor_count').done(function(){ 
+
+      // debugger
+      var contributors = $.get('/'+playa.creatorName+'/'+playa.playlist_url+'/playlist_contributor_count').done(function(){ 
         playa.currentPlaylistContributors = contributors.responseText;
       }).done(function(){
 
@@ -123,25 +124,28 @@ playa.PlaylistView = Backbone.View.extend({
             // put this in a function that says render track and call that function 
             // and pass in song 
           }
+        }).done(function(){
+
+            // this function will work as long as i reomove the iframe an add a new one each time
+            // listens for the song to finish
+
+          playa.initWidget();
+
+          // song stats view
+          $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/current_song_chosen_by', function (response) {
+            // debugger;
+            playa.currentSongByName = response.chosen_by;
+
+            var songStatsOptions = {
+              song_chosen_by: playa.currentSongByName
+            }
+            // debugger
+
+            var songStatsViewTemplate = $('#songStatsView-template').html();
+            var songStatsViewHTML = _.template(songStatsViewTemplate);
+            $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
+          });
         });
-
-        // this function will work as long as i reomove the iframe an add a new one each time
-        // listens for the song to finish
-
-      playa.initWidget();
-
-      // song stats view
-      var songChosenByName = $.get('/current_song_chosen_by').done(function(){
-        playa.currentSongByName = songChosenByName.responseText;
-      });
-
-       var songStatsOptions = {
-        song_chosen_by: playa.currentSongByName
-        }
-
-        var songStatsViewTemplate = $('#songStatsView-template').html();
-        var songStatsViewHTML = _.template(songStatsViewTemplate);
-        $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
 
       });
 

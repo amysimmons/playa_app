@@ -22,6 +22,7 @@ playa.UserLoggedInView = Backbone.View.extend({
         ).done(function(result){
           console.log(result);
           playa.currentUser = null;
+          
         playa.router.navigate("", true)
 
       })

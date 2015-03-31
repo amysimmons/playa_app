@@ -40,9 +40,6 @@ playa.createSongs = function(event, playlist_id){
   playa.skips = new playa.Skips();
 
 
-
-
-
   // create new instance of the class
   playa.router = new playa.Router();
   Backbone.history.start();

@@ -50,6 +50,6 @@ playa.NewPlaylistView = Backbone.View.extend({
           });
         });
     });
-
+    playa.song_limit = song_limit;
   }
 });

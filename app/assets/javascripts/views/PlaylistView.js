@@ -130,7 +130,7 @@ playa.PlaylistView = Backbone.View.extend({
             // listens for the song to finish
 
           playa.initWidget();
-          
+
           $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/current_song_chosen_by', function (response) {
   
             playa.currentSongByName = response.chosen_by;
@@ -171,16 +171,31 @@ playa.PlaylistView = Backbone.View.extend({
       var addSongsViewHTML = _.template(addSongsViewTemplate);
       $('.guest-add-songs-container').html(addSongsViewHTML);
 
-      // // render playlist songs guest view
-      // var addSongsViewTemplate = $('#addSongsView-template').html();
-      // var addSongsViewHTML = _.template(addSongsViewTemplate);
-      // $('.guest-vote-container').html(addSongsViewHTML);
+      // debugger
+      // calcualte the playa.song_limit for this playlist
+
+      // renders input field specified number of times for the playlist
+      _(playa.currentPlaylist[0].attributes.song_limit).times(function(){
+        var addSongViewInputTemplate = $('#addSongInputView-template').html();
+        var addSongViewInputHTML = _.template(addSongViewInputTemplate);
+        $('.add-songs-form').prepend(addSongViewInputHTML);
+      })
+
+      // adds heading to main
+      $('.guest-add-songs-container').prepend('<h2>Add Songs</h2>')
+
+      // render playlist songs guest view
+      var addSongsViewTemplate = $('#addSongsView-template').html();
+      var addSongsViewHTML = _.template(addSongsViewTemplate);
+      $('.guest-vote-container').html(addSongsViewHTML);
 
       // SONGS GUEST VIEW 
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
         playa.playlistSongs = playlistSongs.responseJSON;
       }).done(function(){
 
+          // $('.guest-vote-container').empty();
+          // $('.guest-vote-container').show();
         // get songs for current playlist
         var songs = playa.playlistSongs;
 
@@ -205,6 +220,12 @@ playa.PlaylistView = Backbone.View.extend({
             song_div.html(songViewHTML(songViewOptions));
             song_div.appendTo($('.guest-vote-container'));
           }
+        }).done(function(){
+          // debugger
+          // songs.fetch();
+          // refresh songs here or delete 
+          // $('.guest-vote-container').empty();
+          // $('.guest-vote-container').show();
         });
       });
     }

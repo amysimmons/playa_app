@@ -85,24 +85,32 @@
   </form>  
 </script>
 
-<script id="addSongsView-template" type="text/x-template">
+  <!-- <h2><span class="step">Step2: </span>Add songs</h2>  -->
+
+<script id="addSongsHeadingOwnerView-template" type="text/x-template">
   <h2><span class="step">Step2: </span>Add songs</h2> 
-  <form> 
+</script>
+
+<script id="addSongsHeadingGuestView-template" type="text/x-template">
+  <h2><span class="step"></span>Add songs</h2> 
+</script>
+
+<script id="addSongsView-template" type="text/x-template">
+  <form class="add-songs-form"> 
+    <button class="btn add-songs-btn">Go!</button>
+  </form>  
+</script>
+
+<script id="addSongInputView-template" type="text/x-template">
     <div>
       <label for="url">Song URL</label><br> 
       <input id="url1" placeholder="https://soundcloud.com/thepreatures/ithyf"></input> 
     </div> 
-    <div>
-      <label for="url">Song URL</label><br> 
-      <input id="url2" placeholder="https://soundcloud.com/alabamashakes/hold-on"></input> 
-    </div> 
-    <div>
-      <label for="url">Song URL</label><br> 
-      <input id="url3" placeholder="https://soundcloud.com/asgeirmusic/asgeir-king-and-cross"></input> 
-    </div> 
-    <button class="btn add-songs-btn">Go!</button> 
-    <a href="#shareplaylist">Skip step</a>
   </form>  
+</script>
+
+<script id="addSongSkipStepView-template" type="text/x-template">
+  <a href="#shareplaylist">Skip step</a>
 </script>
 
 <script id="sharePlaylistView-template" type="text/x-template">

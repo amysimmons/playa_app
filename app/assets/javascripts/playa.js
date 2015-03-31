@@ -4,7 +4,7 @@ $(document).ready(function(){
      interpolate: /\{\{(.+?)\}\}/g
    };
 
-playa.createSongs = function(event, playlist_id){
+playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
 
     event.preventDefault();
     event.stopPropagation();
@@ -28,7 +28,12 @@ playa.createSongs = function(event, playlist_id){
         playa.songs.add(song);
       });
     }
-    playa.router.navigate("shareplaylist", true)
+    // if(isOwnerOfPlaylist.responseJSON === true){
+
+      playa.router.navigate("shareplaylist", true)
+
+    // }
+
   }
 
 

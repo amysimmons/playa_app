@@ -4,14 +4,15 @@ $(document).ready(function(){
      interpolate: /\{\{(.+?)\}\}/g
    };
 
-playa.createSongs = function(event){
-  debugger
+playa.createSongs = function(event, playlist_id){
+
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     var urls = []
-    var playlist_id = playa.currentPlaylist[0].attributes.id || playa.playlist_id
+    var playlist_id = playlist_id
+    // playa.currentPlaylist[0].attributes.id || playa.playlist_id
     var user_id = playa.currentUser.get("id");
     var input = $('input');
 

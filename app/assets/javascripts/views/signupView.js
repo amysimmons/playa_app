@@ -33,10 +33,10 @@ playa.SignupView = Backbone.View.extend({
       playa.currentUser = new playa.User(user); 
       // #render the user logged in nav 
       var userLoggedInView = new playa.UserLoggedInView(playa.currentUser);
-      userLoggedInView.render(); // if this has el: '#main', it will replace the old appView
-
-      playa.router.navigate("newplaylist", true)
-
+      userLoggedInView.render();
+      playa.router.navigate("newplaylist", true);
+    
+    // if this has el: '#main', it will replace the old appView
 
     }).error(function(){
 

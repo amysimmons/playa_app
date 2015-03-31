@@ -1,4 +1,21 @@
 var playa = playa || {};
+
+playa.initWidget = function () {
+  var widgetIframe = document.getElementsByTagName('iframe')[0];
+  playa.widget = SC.Widget(widgetIframe);
+
+  playa.widget.bind( SC.Widget.Events.READY, function () {
+    console.log("Widget Ready.");
+    playa.widget.play();   
+  });
+
+
+  playa.widget.bind(SC.Widget.Events.FINISH, function(player, data) {
+    console.log('finished');
+    playa.playlistView.playNextTrack();      
+  });
+},
+
 playa.PlaylistView = Backbone.View.extend({
 
   el: '#main',
@@ -33,9 +50,6 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     });
-
-
-
   },
 
   showView: function(isOwnerOfPlaylist){
@@ -113,17 +127,8 @@ playa.PlaylistView = Backbone.View.extend({
 
         // this function will work as long as i reomove the iframe an add a new one each time
         // listens for the song to finish
-        var widgetIframe = document.getElementsByTagName('iframe')[0],
-        widget = SC.Widget(widgetIframe);
-        widget.bind(SC.Widget.Events.FINISH, function(player, data) {
-          console.log('finished');
-          // playNextTrack(); 
-          playa.playlistView.playNextTrack();
-          debugger;
-          widget.load();
-          widget.play();           
-        });
 
+      playa.initWidget();
 
       // song stats view
       var songChosenByName = $.get('/current_song_chosen_by').done(function(){
@@ -272,7 +277,16 @@ playa.PlaylistView = Backbone.View.extend({
     playa.playlistSongs.shift(firstTrack);
     playa.playlistSongs.push(firstTrack);
 
-    $console.log('end of next track play fn)')
+   // reload the iframe  
+    i = playa.playlistSongs[0].iframe
+    // debugger;
+    var str = $(i).attr("src");
+    str += "&auto_play=true";
+    $('iframe').parent().html( $(i).attr("src", str) );
+
+    playa.initWidget();
+
+    console.log('end of next track play fn)');
   }
 
 });

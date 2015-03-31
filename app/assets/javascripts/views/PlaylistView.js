@@ -5,12 +5,13 @@ playa.PlaylistView = Backbone.View.extend({
   events: {
     "click .shuffle": 'shuffleSongs',
     "click .skip-btn": 'createOrDeleteSkip',
+    'click .add-songs-btn': function (event) {
+      playa.createSongs(event);
+    }
   },
 
   render: function(name, url) {
     view = this;
-
-    // console.log('showingplaylist view!!!!')
 
     playa.playlists.fetch().done(function(){
 
@@ -19,14 +20,13 @@ playa.PlaylistView = Backbone.View.extend({
       playa.currentSongChosenBy = playa.currentPlaylist[0].attributes.user_id
       playa.playlist_url = url
 
-
       var contributors = $.get('/playlist_contributor_count').done(function(){ 
         playa.currentPlaylistContributors = contributors.responseText;
       }).done(function(){
 
         // if user is logged in and user owns the playlist show the playlist owner view
         var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
-          debugger;
+          // debugger;
           view.showView(isOwnerOfPlaylist);
         });
 
@@ -36,10 +36,10 @@ playa.PlaylistView = Backbone.View.extend({
   },
 
   showView: function(isOwnerOfPlaylist){
-    debugger;
+    // debugger;
     if(isOwnerOfPlaylist.responseJSON === true){
 
-      // overall template
+      // overall owner view template
       var playlistOwnerViewTemplate = $('#playlistOwnerView-template').html();
       var playlistOwnerViewHTML = _.template(playlistOwnerViewTemplate);
       this.$el.html(playlistOwnerViewHTML);
@@ -97,7 +97,6 @@ playa.PlaylistView = Backbone.View.extend({
               skipped: skipped
             }
 
-            // console.log(song);
             var song_div = $('<div data-id=' + song.id + '></div>');
             var songViewTemplate = $('#songView-template').html();
             var songViewHTML = _.template(songViewTemplate);
@@ -120,13 +119,56 @@ playa.PlaylistView = Backbone.View.extend({
         var songStatsViewHTML = _.template(songStatsViewTemplate);
         $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
 
-
       });
 
     } else {
+
+      // render the guest view template 
       var playlistGuestViewTemplate = $('#playlistGuestView-template').html();
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
       this.$el.html(playlistGuestViewHTML);
+
+      // render the add songs form
+      var addSongsViewTemplate = $('#addSongsView-template').html();
+      var addSongsViewHTML = _.template(addSongsViewTemplate);
+      $('.guest-add-songs-container').html(addSongsViewHTML);
+
+      // // render playlist songs guest view
+      // var addSongsViewTemplate = $('#addSongsView-template').html();
+      // var addSongsViewHTML = _.template(addSongsViewTemplate);
+      // $('.guest-vote-container').html(addSongsViewHTML);
+
+      // SONGS GUEST VIEW 
+      var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
+        playa.playlistSongs = playlistSongs.responseJSON;
+      }).done(function(){
+
+        // get songs for current playlist
+        var songs = playa.playlistSongs;
+
+        playa.skips.fetch().done(function(){
+          $('.guest-vote-container').html('')
+          for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+            // for each song grab the song id and check whether 
+            // the current user's skips include that song id
+            var skipped = "skip";
+            if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
+              skipped = "unskip";
+            }
+            var songViewOptions = {
+              song_info: song,
+              skipped: skipped
+            }
+            // console.log(song);
+            var song_div = $('<div data-id=' + song.id + '></div>');
+            var songViewTemplate = $('#songView-template').html();
+            var songViewHTML = _.template(songViewTemplate);
+            song_div.html(songViewHTML(songViewOptions));
+            song_div.appendTo($('.guest-vote-container'));
+          }
+        });
+      });
     }
   },
 

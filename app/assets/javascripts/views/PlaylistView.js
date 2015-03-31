@@ -130,20 +130,30 @@ playa.PlaylistView = Backbone.View.extend({
             // listens for the song to finish
 
           playa.initWidget();
-
-          // song stats view
+          
           $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/current_song_chosen_by', function (response) {
-            // debugger;
+  
             playa.currentSongByName = response.chosen_by;
 
-            var songStatsOptions = {
-              song_chosen_by: playa.currentSongByName
-            }
-            // debugger
+              
+          }).done(function(){
 
-            var songStatsViewTemplate = $('#songStatsView-template').html();
-            var songStatsViewHTML = _.template(songStatsViewTemplate);
-            $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
+            $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/' + playa.playlistSongs[0].id + '/skips_on_song', function(response){
+
+              playa.skips_num = response.skips_num;
+              playa.skips_pc = response.skips_percentage;
+            
+              var songStatsOptions = {
+                song_chosen_by: playa.currentSongByName,
+                skips_on_song: playa.skips_num,
+                skips_as_pc: playa.skips_pc
+              }
+              var songStatsViewTemplate = $('#songStatsView-template').html();
+              var songStatsViewHTML = _.template(songStatsViewTemplate);
+              $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));  
+               
+            })
+
           });
         });
 

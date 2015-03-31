@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   #   get '/skip' => 'skips_on_song'
   # end
 
-  get '/skips_on_song' => 'playlists#skips_on_song'
+  get '/:username/:playlist_url/:id/skips_on_song' => 'skips#skips_on_song'
 
-  get '/skips_on_user' => 'playlists#skips_on_user'
+  get '/skips_on_user' => 'skips#skips_on_user'
 
 end

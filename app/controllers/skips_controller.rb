@@ -32,8 +32,9 @@ class SkipsController < ApplicationController
   end
 
   def skips_on_song
+    # binding.pry
     #gets the number of skips on a particular song
-    skips_num = Song.find(:id).skips.count
+    skips_num = Song.find_by(:id => params[:id]).skips.count
 
     # gets the number of contributors to that playlist
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
@@ -42,7 +43,11 @@ class SkipsController < ApplicationController
     # calculates percenate of users who have skipped the song
     skips_percentage = (skips_num/count.to_f)*100
 
-    render :json => skips_percentage
+    # render :json => skips_percentage
+
+    render :json => { skips_num: skips_num, skips_percentage: skips_percentage }
+
+
   end
 
   def skips_on_user

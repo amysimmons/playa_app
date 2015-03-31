@@ -106,16 +106,22 @@ playa.PlaylistView = Backbone.View.extend({
             song_div.html(songViewHTML(songViewOptions));
             song_div.appendTo($('.songs-container'));
 
+            // put this in a function that says render track and call that function 
+            // and pass in song 
           }
         });
 
-        // will work as long a si reomove iframe an add anew one each tiem 
-        // listen for song finished
+        // this function will work as long as i reomove the iframe an add a new one each time
+        // listens for the song to finish
         var widgetIframe = document.getElementsByTagName('iframe')[0],
         widget = SC.Widget(widgetIframe);
         widget.bind(SC.Widget.Events.FINISH, function(player, data) {
           console.log('finished');
-          // playNextTrack();                  
+          // playNextTrack(); 
+          playa.playlistView.playNextTrack();
+          debugger;
+          widget.load();
+          widget.play();           
         });
 
 
@@ -252,15 +258,21 @@ playa.PlaylistView = Backbone.View.extend({
   },
 
   playNextTrack: function(event){
+    console.log('playing next track')
+    // debugger
 
-  //   console.log('play songs')
-  // var iframeElement   = document.querySelector('iframe');
-  // var iframeElementID = iframeElement.id;
-  // var widget1         = SC.Widget(iframeElement);
-  // var widget2         = SC.Widget(iframeElementID);
-  // // widget1 === widget2
+    // rearrange songview
+    $songs = $('.songs-container')[0]
+    $first = $songs.firstChild
+    $songs.removeChild($first)
+    $songs.appendChild($first)
 
+    // rearrange array
+    var firstTrack = playa.playlistSongs[0];
+    playa.playlistSongs.shift(firstTrack);
+    playa.playlistSongs.push(firstTrack);
 
+    $console.log('end of next track play fn)')
   }
 
 });

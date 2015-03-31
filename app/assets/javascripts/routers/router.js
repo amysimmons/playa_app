@@ -135,11 +135,9 @@ playa.Router = Backbone.Router.extend({
     // pass the playlist model into the view
     // debugger
     // debugger;
-    var playlistView = new playa.PlaylistView();
+    playa.playlistView = new playa.PlaylistView();
 
-
-
-    playlistView.render(username, playlist_url);
+    playa.playlistView.render(username, playlist_url);
 
   }
 

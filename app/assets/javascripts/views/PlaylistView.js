@@ -46,7 +46,7 @@ playa.PlaylistView = Backbone.View.extend({
         var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
           // debugger;
           view.showView(isOwnerOfPlaylist);
-        });
+        }); 
 
       });
 

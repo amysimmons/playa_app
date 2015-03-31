@@ -11,7 +11,9 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
     event.stopImmediatePropagation();
 
     var urls = []
-    var playlist_id = playlist_id
+    var playlist_id = playlist_id || playa.currentPlaylist[0].attributes.id
+
+    debugger
     // playa.currentPlaylist[0].attributes.id || playa.playlist_id
     var user_id = playa.currentUser.get("id");
     var input = $('input');
@@ -29,9 +31,16 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
       });
     }
     // if(isOwnerOfPlaylist.responseJSON === true){
-
+    if ( playa.creatorName === playa.currentUser.get("username") ) {
       playa.router.navigate("shareplaylist", true)
+    }else {
 
+      var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
+        // debugger;
+        playa.playlistView.showView(isOwnerOfPlaylist);
+      });
+
+    }
     // }
 
   }
@@ -40,6 +49,7 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
   playa.playlists = new playa.Playlists();
   playa.songs = new playa.Songs();
   playa.playlistSongs = new playa.PlaylistSongs();
+  playa.playlistSongsBackBone = playa.playlistSongs;
   playa.myplaylists = new playa.Myplaylists();
   playa.users = new playa.Users();
   playa.skips = new playa.Skips();

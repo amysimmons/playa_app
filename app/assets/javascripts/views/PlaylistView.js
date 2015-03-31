@@ -38,10 +38,12 @@ playa.PlaylistView = Backbone.View.extend({
 
     if(isOwnerOfPlaylist.responseJSON === true){
 
+      // overall template
       var playlistOwnerViewTemplate = $('#playlistOwnerView-template').html();
       var playlistOwnerViewHTML = _.template(playlistOwnerViewTemplate);
       this.$el.html(playlistOwnerViewHTML);
 
+      // playlist stats view
       var playlistStatsOptions = {
         playlist_name: playa.currentPlaylist[0].attributes.name,
         contributor_count: playa.currentPlaylistContributors,
@@ -52,31 +54,37 @@ playa.PlaylistView = Backbone.View.extend({
       var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
       $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
 
-      var playerOptions = {
-        creator_name: playa.creatorName,
-        playlist_url: playa.playlist_url
-       
-      }
 
-      var playerViewTemplate = $('#playerView-template').html();
-      var playerViewHTML = _.template(playerViewTemplate);
-      $('.player-container').html(playerViewHTML(playerOptions));
-
+      // song stats view
        var songStatsOptions = {
           // song_info: playa.songs.toJSON()[i],
           // image: playa.songs.toJSON()[i],
           // artist: playa.songs.toJSON()[i]
         }
 
-      var songStatsViewTemplate = $('#songStatsView-template').html();
-      var songStatsViewHTML = _.template(songStatsViewTemplate);
-      $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
+        var songStatsViewTemplate = $('#songStatsView-template').html();
+        var songStatsViewHTML = _.template(songStatsViewTemplate);
+        $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
 
+      // show the playlist songs on the page
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
 
         playa.playlistSongs = playlistSongs.responseJSON;
       
       }).done(function(){
+
+        playa.currentSong = playa.playlistSongs[0].iframe
+
+        //render player view to show the first song in the shuffled song array
+        var playerOptions = {
+          creator_name: playa.creatorName,
+          playlist_url: playa.playlist_url,
+          iframe: playa.currentSong
+        }
+     
+        var playerViewTemplate = $('#playerView-template').html();
+        var playerViewHTML = _.template(playerViewTemplate);
+        $('.player-container').html(playerViewHTML(playerOptions));
 
         var songs = playa.playlistSongs;
 
@@ -124,7 +132,6 @@ playa.PlaylistView = Backbone.View.extend({
     // debugger
     // run this on shuffle button click
     // playa.playlistSongs.reset( playa.playlistSongs.shuffle(), {silent: true} );
-
 
   },
 

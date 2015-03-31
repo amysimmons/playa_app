@@ -144,17 +144,16 @@
 </script>
 
 <script id="playerView-template" type="text/x-template">
-  <a href="/{{creator_name}}/{{playlist_url}}/shuffle_songs" class="shuffle" data-remote=true>Shuffle</a>
+
+  <a href="" class="shuffle" >Shuffle</a>
 </script>
 
+  <!-- <a href="/{{creator_name}}/{{playlist_url}}/shuffle_songs" class="shuffle" data-remote=true>Shuffle</a> -->
 <script id="songView-template" type="text/x-template">
   <div class="song-view">
     <div class="song-count"></div>
     <img class="song-image" src="{{song_info.image}}"/>
-    <form action="/skips">
-      <input class="hide skipped" type="submit" value=true><input>
-      <button class="skip btn">Vote to skip</button>
-    </form>
+    <a href="" class="{{skipped}} skip-btn btn">Vote to {{skipped}}</a>
   </div>
 </script>
 

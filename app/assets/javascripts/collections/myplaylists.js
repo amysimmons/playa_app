@@ -4,3 +4,5 @@ playa.Myplaylists = Backbone.Collection.extend({
   url: '/myplaylists',
   model: playa.Myplaylist
 });
+
+

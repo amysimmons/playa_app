@@ -6,3 +6,4 @@ playa.Myplaylist = Backbone.Model.extend({
   }
 
 });
+

@@ -1,8 +1,9 @@
 class SkipsController < ApplicationController
 
   def index
-    @skips = Skip.all
-    render :json => @skips
+    # binding.pry
+    # @skips = Skip.where :user_id => @current_user.id
+    render :json => @current_user.skips
   end
 
   def create
@@ -16,6 +17,10 @@ class SkipsController < ApplicationController
 
   def new
     @skip = Skip.new
+  end
+
+  def destroy
+    skip.destroy
   end
 
   def skips_on_song

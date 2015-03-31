@@ -4,7 +4,7 @@ playa.PlaylistView = Backbone.View.extend({
   el: '#main',
   events: {
     "click .shuffle": 'shuffleSongs',
-    "submit form": 'createNewSongSkip'
+    "click .skip-btn": 'createOrDeleteSkip',
   },
 
   render: function(name, url) {
@@ -46,16 +46,13 @@ playa.PlaylistView = Backbone.View.extend({
         playlist_name: playa.currentPlaylist[0].attributes.name,
         contributor_count: playa.currentPlaylistContributors,
         creator_name: playa.creatorName
-       
       }
 
       var playlistStatsViewTemplate = $('#playlistStatsView-template').html();
       var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
       $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
 
-
       var playerOptions = {
-
         creator_name: playa.creatorName,
         playlist_url: playa.playlist_url
        
@@ -75,33 +72,43 @@ playa.PlaylistView = Backbone.View.extend({
       var songStatsViewHTML = _.template(songStatsViewTemplate);
       $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));     
 
-      playa.songs.fetch().done(function(){
-      
-        var songs = playa.songs.toJSON();
-        for (var i = 0; i < songs.length; i++) {
+      var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
 
-          // only show songs on page if the playlist id of the song matches 
-          // the id of the current playlist on the page
-          var song_playlist_id = playa.songs.models[i].attributes.playlist_id;
-          var this_playist_id = playa.currentPlaylist[0].id;
-          // debugger
-          if(song_playlist_id === this_playist_id){
-            var songViewOptions = {
-              song_info: playa.songs.toJSON()[i]
+        playa.playlistSongs = playlistSongs.responseJSON;
+      
+      }).done(function(){
+
+        var songs = playa.playlistSongs;
+
+        playa.skips.fetch().done(function () {
+          for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+
+            // for each song grab the song id and check whether 
+            // the current user's skips include that song id
+
+            var skipped = "skip";
+            if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
+              skipped = "unskip";
             }
-            song = songs[i];
-            var song_div = $('<div></div>');
+
+            var songViewOptions = {
+              song_info: song,
+              skipped: skipped
+            }
+
+            console.log(song);
+            var song_div = $('<div data-id=' + song.id + '></div>');
             var songViewTemplate = $('#songView-template').html();
             var songViewHTML = _.template(songViewTemplate);
             song_div.html(songViewHTML(songViewOptions));
             song_div.appendTo($('.songs-container'));
           }
-        };
-      })
+        });
 
-    // if no user is logged in or if the current user doesn't own the playlist, 
-    // show the playlist gues view
-    }else{
+      });
+
+    } else {
       var playlistGuestViewTemplate = $('#playlistGuestView-template').html();
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
       this.$el.html(playlistGuestViewHTML);
@@ -111,18 +118,59 @@ playa.PlaylistView = Backbone.View.extend({
   shuffleSongs: function(event){
     event.preventDefault();
     console.log('shuffling');
+
+    // playa.showView();
+
+    // debugger
+    // run this on shuffle button click
+    // playa.playlistSongs.reset( playa.playlistSongs.shuffle(), {silent: true} );
+
+
   },
 
-  createNewSongSkip: function(event){
+  createOrDeleteSkip: function(event){
     event.preventDefault();
-    console.log('skipping');
-    var user_id = playa.currentUser.id
-    var song_id = 380;
-    var is_skipped = true;
-    var skip = new playa.Skip({user_id: user_id, song_id: song_id, is_skipped: is_skipped})
-    skip.save().done(function(){
-      playa.skips.add(skip);
-    });
+    console.log('skipping or unskipping');
+
+    // if button has class of skipped
+    // post request 
+
+    // elsif has class unskipping
+      // delete post request 
+
+    var user_id = playa.currentUser.id;
+    var song_id = $(event.currentTarget).parent().parent().data("id");
+    // debugger;
+
+    if ( $(event.currentTarget).hasClass("skip") ) {
+      console.log("It had the class skip, save it.")
+      var skip = new playa.Skip({ user_id: user_id, song_id: song_id })
+      skip.save().done(function(){
+
+        // debugger;
+        // get skip id and add id to skip
+        playa.skips.add(skip);
+        playa.skips.fetch();
+        console.log("Yep, that save worked.");
+      });
+    } else {
+      console.log("It didn't have the class skip, delete it");
+      console.log($(event.currentTarget).parent().parent().data("skip_id"));
+         // debugger;
+      $.ajax("/skips/" + $(event.currentTarget).parent().parent().data("skip_id"), {
+     
+        type: "DELETE",
+        data: {
+          _method: "DELETE",
+          user_id: user_id,
+          song_id: song_id
+        },
+        success: function (response) {
+          console.log("Yep, that is deleted.")
+        }
+      })
+
+    }
   }
 });
 

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require soundcloud_api
 //= require soundcloud
 //= require_tree ./models
 //= require_tree ./collections

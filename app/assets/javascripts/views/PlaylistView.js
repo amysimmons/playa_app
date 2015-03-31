@@ -33,6 +33,9 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     });
+
+
+
   },
 
   showView: function(isOwnerOfPlaylist){
@@ -105,6 +108,16 @@ playa.PlaylistView = Backbone.View.extend({
 
           }
         });
+
+        // will work as long a si reomove iframe an add anew one each tiem 
+        // listen for song finished
+        var widgetIframe = document.getElementsByTagName('iframe')[0],
+        widget = SC.Widget(widgetIframe);
+        widget.bind(SC.Widget.Events.FINISH, function(player, data) {
+          console.log('finished');
+          // playNextTrack();                  
+        });
+
 
       // song stats view
       var songChosenByName = $.get('/current_song_chosen_by').done(function(){
@@ -236,7 +249,20 @@ playa.PlaylistView = Backbone.View.extend({
         }
       })
     }
+  },
+
+  playNextTrack: function(event){
+
+  //   console.log('play songs')
+  // var iframeElement   = document.querySelector('iframe');
+  // var iframeElementID = iframeElement.id;
+  // var widget1         = SC.Widget(iframeElement);
+  // var widget2         = SC.Widget(iframeElementID);
+  // // widget1 === widget2
+
+
   }
+
 });
 
 //   createNewSecret: function(event){

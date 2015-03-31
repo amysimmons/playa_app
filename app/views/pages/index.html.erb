@@ -121,15 +121,14 @@
 
 <script id="playlistOwnerView-template" type="text/x-template">
   <h2>Playlist owner view</h2>
-    <div class="playlist-stats-container"></div>
     <div class="player-container"></div>
+    <div class="playlist-stats-container"></div>
     <div class="song-stats-container"></div>
     <div class="songs-container"></div>
 </script>
 
 <script id="playlistStatsView-template" type="text/x-template">
   <ul class="playlist-stats stats">
-    <li class="stat playlist-stat">Playlist name: {{playlist_name}}</li>
     <li class="stat playlist-stat">Created by: {{creator_name}}</li>
     <li class="stat playlist-stat">Contributors: {{contributor_count}}</li>
   </ul>
@@ -137,13 +136,14 @@
 
 <script id="songStatsView-template" type="text/x-template">
    <ul class="song-stats stats">
-    <li class="stat song-stat">Song chosen by:</li>
+    <li class="stat song-stat">Song chosen by:{{song_chosen_by}}</li>
     <li class="stat song-stat">Skips:</li>
     <li class="stat song-stat">XXX</li>
   </ul>
 </script>
 
 <script id="playerView-template" type="text/x-template">
+  <div class="playlist-name">{{playlist_name}}</div>
   <div class="player">{{iframe}}</div>
   <a href="" class="shuffle" >Shuffle</a>
 </script>

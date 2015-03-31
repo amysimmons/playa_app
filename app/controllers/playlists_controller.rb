@@ -38,11 +38,10 @@ class PlaylistsController < ApplicationController
   end
 
   def is_playlist_owner
-    current_user = User.find_by :id => session[:user_id]
-    playlist_url = current_user.playlists.find_by(:playlist_url => params[:playlist_url])
-    r = current_user.playlists.select{|playlist| playlist.playlist_url == playlist_url}
-    r.empty?
-    render :json => r.empty?
+    playlist = Playlist.where( :playlist_url => params["playlist_url"] )
+    is_owner = ( playlist[0].user_id === session["user_id"] )
+
+    render :json => is_owner
   end
 
   def playlist_contributor_count

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get '/current_song_chosen_by' => 'playlists#current_song_chosen_by'
 
-
+  delete '/skips' => 'skips#destroy'
   # resources :songs do
   #   # /songs/75/skip
   #   get '/skip' => 'skips_on_song'

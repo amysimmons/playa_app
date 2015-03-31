@@ -20,7 +20,15 @@ class SkipsController < ApplicationController
   end
 
   def destroy
-    skip.destroy
+    skip = Skip.where( :user_id => params["user_id"], :song_id => params["song_id"] )
+    if Skip.destroy( skip[0].id )
+      render :json => { status: "OK" }
+    else
+      render :json => { status: "NOT OK" }
+    end
+
+    # skip.destroy
+
   end
 
   def skips_on_song

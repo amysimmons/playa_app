@@ -3,41 +3,39 @@
 <div id="footer"></div>
 
 <script id="userLogInView-template" type="text/x-template">
-  <h2>Log in</h2> 
-  <form> 
-    <div>
-      <label for="username">Username</label><br> 
-      <input id="username" placeholder="Enter your username" required></input> 
-    </div> 
-    <div>
-      <label for="password">Password</label><br>
-      <input id="password" type="password" placeholder="Enter your password" required></input> 
-    </div> 
-    <button class="btn log-in-btn">Log in</button> 
-  </form>  
+  <div class="main-container">
+    <h2>Log in</h2> 
+    <form> 
+      <div>
+        <input id="username" placeholder="Enter your username" required></input> 
+      </div> 
+      <div>
+        <input id="password" type="password" placeholder="Enter your password" required></input> 
+      </div> 
+      <button class="btn log-in-btn">Log in</button> 
+    </form> 
+  </div> 
 </script>
 
 <script id="userSignUpView-template" type="text/x-template">
-  <h2>Sign up</h2> 
-  <form> 
-    <div>
-      <label for="username">Username</label><br> 
-      <input id="username" pattern=".{5,15}" placeholder="Enter your username" required></input> 
-    </div> 
-    <div>
-      <label for="email">Email</label><br> 
-      <input id="email" placeholder="Enter your email" required></input> 
-    </div> 
-    <div>
-      <label for="password">Password</label><br>
-      <input id="password" type="password" placeholder="Enter your password" required></input> 
-    </div> 
-    <div>
-      <label for="password_confirmation">Password Confirmation</label><br>
-      <input id="password_confirmation" type="password" placeholder="Confirm password" required></input>
-    </div> 
-    <button class="btn sign-up-btn">Sign up</button> 
-  </form>  
+  <div class="main-container">
+    <h2>Sign up</h2> 
+    <form> 
+      <div>
+        <input id="username" pattern=".{5,15}" placeholder="Enter your username" required></input> 
+      </div> 
+      <div>
+        <input id="email" placeholder="Enter your email" required></input> 
+      </div> 
+      <div>
+        <input id="password" type="password" placeholder="Enter your password" required></input> 
+      </div> 
+      <div>
+        <input id="password_confirmation" type="password" placeholder="Confirm password" required></input>
+      </div> 
+      <button class="btn sign-up-btn">Sign up</button> 
+    </form> 
+  </div>  
 </script>
 
 <script id="userLoggedInView-template" type="text/x-template">
@@ -71,18 +69,20 @@
 </script>
 
 <script id="newPlaylistView-template" type="text/x-template">
-  <h2><span class="step">Step1: </span>Make new playlist</h2> 
-  <form> 
-    <div>
-      <label for="name">Name</label><br> 
-      <input id="name" placeholder="Enter playlist name"></input> 
-    </div> 
-    <div>
-      <label for="song_limit">No. of songs per guest</label><br> 
-      <input id="song-limit" type="number" min="1" max="100" placeholder="Enter song limit"></input> 
-    </div>
-    <button class="btn new-playlist-btn">Go!</button> 
-  </form>  
+  <div class="main-container">
+    <h2><span class="step">Step1: </span>Make new playlist</h2> 
+    <form> 
+      <div>
+        <label for="name">Name</label><br> 
+        <input id="name" placeholder="Enter playlist name"></input> 
+      </div> 
+      <div>
+        <label for="song_limit">No. of songs per guest</label><br> 
+        <input id="song-limit" type="number" min="1" max="100" placeholder="Enter song limit"></input> 
+      </div>
+      <button class="btn new-playlist-btn">Go!</button> 
+    </form>  
+  </div>
 </script>
 
   <!-- <h2><span class="step">Step2: </span>Add songs</h2>  -->
@@ -96,9 +96,11 @@
 </script>
 
 <script id="addSongsView-template" type="text/x-template">
-  <form class="add-songs-form"> 
-    <button class="btn add-songs-btn">Go!</button>
-  </form>  
+  <div class="main-container">
+    <form class="add-songs-form"> 
+      <button class="btn add-songs-btn">Go!</button>
+    </form>  
+  </div>
 </script>
 
 <script id="addSongInputView-template" type="text/x-template">

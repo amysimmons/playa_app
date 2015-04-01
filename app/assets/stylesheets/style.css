@@ -1,0 +1,135 @@
+@import url(http://fonts.googleapis.com/css?family=Righteous);
+/*<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>*/
+
+@import url(http://fonts.googleapis.com/css?family=Hind:400,300,500,600,700);
+/*<link href='http://fonts.googleapis.com/css?family=Hind:400,300,500,600,700' rel='stylesheet' type='text/css'>*/
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);
+
+/*<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel='stylesheet' type='text/css'>*/
+
+* {
+  margin: 0 auto;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+
+a {
+  color: #002A4A;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+}
+
+body {
+  /*font-family: 'Hind', sans-serif;*/
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  color: #141414;
+  color: #212121;
+}
+
+header {
+  max-width: 100%;
+  height: 90px;
+  background-color: #000;
+  color: #FFF;
+  border-top: 8px solid #002A4A;
+}
+
+header h1 {
+  padding-left: 0.5em;
+  float: left;
+  font-family: 'Righteous', cursive;
+}
+
+header nav {
+  float: right;
+}
+
+.title i {
+  color: #FFF;
+  padding-top: 0.4em;
+  padding-left: 0.2em;
+}
+
+nav {
+  max-width: 98%;
+  padding: 0.5em;
+  vertical-align: middle;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin: 20px 10px;
+}
+
+nav a {
+  padding-top: 10px;
+  padding-left: 5px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+nav li:hover {
+  padding-bottom: 2px;
+  border-bottom: 3px solid #DD1C3A;
+  color: #DD1C3A;
+}
+
+nav li a:hover {
+  color: #DD1C3A;
+}
+
+.main-container {
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+  margin-top: 80px;
+}
+
+h2 {
+  /*color: #002A4A;*/
+}
+
+form input, form button {
+  border: 4px solid #DD1C3A;
+  width: 400px;
+  height: 75px;
+  font-size: 22px;
+  border-radius: 3px;
+
+  /*background-color: #FFF1CE;*/
+}
+
+form div, form button {
+    margin-top: 1em;
+}
+
+
+

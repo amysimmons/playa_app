@@ -77,7 +77,7 @@ playa.PlaylistView = Backbone.View.extend({
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(response){
         // debugger
         playa.playlistSongs = response;
-        debugger;
+       
         console.log('!!!', playa.playlistSongs[0]);
         playa.currentSong = playa.playlistSongs[0].iframe
 
@@ -88,7 +88,7 @@ playa.PlaylistView = Backbone.View.extend({
           playlist_url: playa.playlist_url,
           iframe: playa.currentSong
         }
-     
+ 
         var playerViewTemplate = $('#playerView-template').html();
         var playerViewHTML = _.template(playerViewTemplate);
         $('.player-container').html(playerViewHTML(playerOptions));
@@ -104,25 +104,41 @@ playa.PlaylistView = Backbone.View.extend({
             // for each song grab the song id and check whether 
             // the current user's skips include that song id
 
-            var skipped = "skip";
-            if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
-              skipped = "unskip";
+            var songOptions = function (song) {
+              // debugger
+              var skipped = "skip";
+              if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
+                skipped = "unskip";
+              }
+
+              // for each song retreive the number of skips it has
+              $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/' + song.id + '/skips_on_song', function(response){
+                var skips_num = response.skips_num;
+                var skips_pc = response.skips_percentage;
+
+                // end of retreiving that song's skips
+
+                var songViewOptions = {
+                  song_info: song,
+                  song_skips: skips_num,
+                  skipped: skipped
+                }
+
+                // debugger;
+                var song_div = $('<div data-id=' + song.id + '></div>');
+                var songViewTemplate = $('#songView-template').html();
+                var songViewHTML = _.template(songViewTemplate);
+                song_div.html(songViewHTML(songViewOptions));
+                song_div.appendTo($('.songs-container'));
+
+                // put this in a function that says render track and call that function 
+                // and pass in song 
+
+              });
             }
-
-            var songViewOptions = {
-              song_info: song,
-              skipped: skipped
-            }
-
-            var song_div = $('<div data-id=' + song.id + '></div>');
-            var songViewTemplate = $('#songView-template').html();
-            var songViewHTML = _.template(songViewTemplate);
-            song_div.html(songViewHTML(songViewOptions));
-            song_div.appendTo($('.songs-container'));
-
-            // put this in a function that says render track and call that function 
-            // and pass in song 
+            songOptions(song);
           }
+
         }).done(function(){
 
             // this function will work as long as i reomove the iframe an add a new one each time
@@ -159,7 +175,7 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     } else {
-      debugger
+      // debugger
       // render the guest view template 
       var playlistGuestViewTemplate = $('#playlistGuestView-template').html();
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
@@ -178,12 +194,10 @@ playa.PlaylistView = Backbone.View.extend({
         var addSongViewInputTemplate = $('#addSongInputView-template').html();
         var addSongViewInputHTML = _.template(addSongViewInputTemplate);
         $('.add-songs-form').prepend(addSongViewInputHTML);
-      })
+      });
 
       // adds heading to main
-      $('.guest-add-songs-container').prepend('<h2>Add Songs</h2>')
-
-
+      $('.guest-add-songs-container').prepend('<h2>Add Songs</h2>');
 
       // render playlist songs guest view
       var addSongsViewTemplate = $('#addSongsView-template').html();
@@ -195,8 +209,6 @@ playa.PlaylistView = Backbone.View.extend({
         playa.playlistSongs = playlistSongs.responseJSON;
       }).done(function(){
 
-          // $('.guest-vote-container').empty();
-          // $('.guest-vote-container').show();
         // get songs for current playlist
         var songs = playa.playlistSongs;
 
@@ -206,29 +218,43 @@ playa.PlaylistView = Backbone.View.extend({
             var song = songs[i];
             // for each song grab the song id and check whether 
             // the current user's skips include that song id
-            var skipped = "skip";
-            if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
-              skipped = "unskip";
+
+            var songOptions = function (song) {
+              // debugger
+              var skipped = "skip";
+              if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
+                skipped = "unskip";
+              }
+
+              // for each song retreive the number of skips it has
+              $.get('/' + playa.creatorName + '/' + playa.playlist_url + '/' + song.id + '/skips_on_song', function(response){
+                var skips_num = response.skips_num;
+                var skips_pc = response.skips_percentage;
+
+                // end of retreiving that song's skips
+
+                var songViewOptions = {
+                  song_info: song,
+                  song_skips: skips_num,
+                  skipped: skipped
+                }
+
+                // debugger;
+                var song_div = $('<div data-id=' + song.id + '></div>');
+                var songViewTemplate = $('#songView-template').html();
+                var songViewHTML = _.template(songViewTemplate);
+                song_div.html(songViewHTML(songViewOptions));
+                song_div.appendTo($('.songs-container'));
+
+                // put this in a function that says render track and call that function 
+                // and pass in song 
+
+              });
             }
-            var songViewOptions = {
-              song_info: song,
-              skipped: skipped
-            }
-            // console.log(song);
-            var song_div = $('<div data-id=' + song.id + '></div>');
-            var songViewTemplate = $('#songView-template').html();
-            var songViewHTML = _.template(songViewTemplate);
-            song_div.html(songViewHTML(songViewOptions));
-            song_div.appendTo($('.guest-vote-container'));
+            songOptions(song);
           }
-        }).done(function(){
-          // debugger
-          // songs.fetch();
-          // refresh songs here or delete 
-          // $('.guest-vote-container').empty();
-          // $('.guest-vote-container').show();
-        });
       });
+     });
     }
   },
 

@@ -160,6 +160,11 @@
   <div class="song-view">
     <div class="song-count"></div>
     <img class="song-image" src="{{song_info.image}}"/>
+    <ul>
+      <li>Song: {{song_info.title}}</li>
+      <li>Artist: {{song_info.artist}} </li>
+      <li>Skips: {{song_skips}}</li>
+    </ul>
     <a href="" class="{{skipped}} skip-btn btn">Vote to {{skipped}}</a>
   </div>
 </script>

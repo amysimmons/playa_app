@@ -145,7 +145,7 @@
 <script id="songStatsView-template" type="text/x-template">
    <ul class="song-stats stats">
     <li class="stat song-stat">Song chosen by:{{song_chosen_by}}</li> 
-    <li class="stat song-stat">No. of skips: {{skips_on_song}}, Percentage of skips: {{skips_as_pc}}%</li>
+    <li class="stat song-stat">Skips: {{skips_on_song}}, {{skips_as_pc}}%</li>
   </ul>
 </script>
 
@@ -163,7 +163,7 @@
     <ul>
       <li>Song: {{song_info.title}}</li>
       <li>Artist: {{song_info.artist}} </li>
-      <li>Skips: {{song_skips}}</li>
+      <li>Skips: {{song_skips}}, {{song_skips_pc}}%</li>
     </ul>
     <a href="" class="{{skipped}} skip-btn btn">Vote to {{skipped}}</a>
   </div>

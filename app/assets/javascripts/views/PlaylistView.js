@@ -121,6 +121,7 @@ playa.PlaylistView = Backbone.View.extend({
                 var songViewOptions = {
                   song_info: song,
                   song_skips: skips_num,
+                  song_skips_pc: skips_pc,
                   skipped: skipped
                 }
 
@@ -206,8 +207,8 @@ playa.PlaylistView = Backbone.View.extend({
 
       // SONGS GUEST VIEW 
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
+        // debugger
         playa.playlistSongs = playlistSongs.responseJSON;
-      }).done(function(){
 
         // get songs for current playlist
         var songs = playa.playlistSongs;
@@ -236,15 +237,17 @@ playa.PlaylistView = Backbone.View.extend({
                 var songViewOptions = {
                   song_info: song,
                   song_skips: skips_num,
+                  song_skips_pc: skips_pc,
                   skipped: skipped
                 }
 
+                // only render the template if the skips on the song are less than 50%
                 // debugger;
                 var song_div = $('<div data-id=' + song.id + '></div>');
                 var songViewTemplate = $('#songView-template').html();
                 var songViewHTML = _.template(songViewTemplate);
                 song_div.html(songViewHTML(songViewOptions));
-                song_div.appendTo($('.songs-container'));
+                song_div.appendTo($('.guest-vote-container'));
 
                 // put this in a function that says render track and call that function 
                 // and pass in song 

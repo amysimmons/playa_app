@@ -52,8 +52,24 @@ class PlaylistsController < ApplicationController
 
   def playlist_songs
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
-    # binding.pry
     shuffled_songs = playlist.songs.shuffle
+
+    skipped_songs = []
+
+    shuffled_songs.each do |song|
+      contributor_count = playlist.songs.map{|song|song.user_id}.uniq.count
+      skips_on_song =  song.skips.count
+      percentage_of_skips = (skips_on_song / contributor_count.to_f) * 100
+
+      if percentage_of_skips > 50
+        # song.pop
+        skipped_songs << song
+      end
+
+    end
+     # go through each song, if the song is in skipped songs we reject it
+    shuffled_songs.reject! { |song| skipped_songs.include? song }
+    # binding.pry
     #render :json => { songs: shuffled_songs }
     render :json => shuffled_songs
     # end

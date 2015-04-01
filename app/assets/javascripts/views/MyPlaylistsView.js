@@ -25,14 +25,16 @@ playa.MyPlaylistsView = Backbone.View.extend({
       for (var i = 0; i < myplaylists.length; i++) {
         var options = {
           playlist_url: playa.myplaylists.toJSON()[i],
-          user: playa.currentUser.toJSON()
+          user: playa.currentUser.toJSON(),
+          created_at: myplaylists[i].created_at
         }
+        // debugger
         var myplaylist = myplaylists[i];
         var playlist_div = $('<div></div>');
         var myPlaylistsViewTemplate = $('#myPlaylistsView-template').html();
         var myPlaylistsViewHTML = _.template(myPlaylistsViewTemplate);
         playlist_div.html(myPlaylistsViewHTML(options));
-        playlist_div.appendTo($('#main'));
+        playlist_div.appendTo($('.playlists'));
 
       };
 

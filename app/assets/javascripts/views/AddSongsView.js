@@ -33,7 +33,7 @@ playa.AddSongsView = Backbone.View.extend({
     $('.add-songs-form').append(addSongSkipViewHTML);
 
     // adds heading to main
-    $('#main').prepend('<h2>Step two: Add Songs</h2>')
+    $('.main-container').prepend('<h2>Step two: Add Songs</h2>')
 
   }
 

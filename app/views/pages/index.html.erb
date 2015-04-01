@@ -84,11 +84,12 @@
 </script>
 
 <script id="addSongsHeadingOwnerView-template" type="text/x-template">
-  <h2><span class="step">Step2: </span>Add songs</h2> 
+  <h2><span class="step">Step2: </span>Add songs</h2>  
 </script>
 
 <script id="addSongsHeadingGuestView-template" type="text/x-template">
-  <h2><span class="step"></span>Add songs</h2> 
+  <h2><span class="step"></span>Add songs......</h2>
+  <p>Paste the URL of any SoundCloud song</p> 
 </script>
 
 <script id="addSongsView-template" type="text/x-template">
@@ -101,14 +102,13 @@
 
 <script id="addSongInputView-template" type="text/x-template">
     <div>
-      <label for="url">Song URL</label><br> 
       <input id="url1" placeholder="https://soundcloud.com/thepreatures/ithyf"></input> 
     </div> 
   </form>  
 </script>
 
 <script id="addSongSkipStepView-template" type="text/x-template">
-  <a href="#shareplaylist">Skip step</a>
+  <a class="skip-step" href="#shareplaylist">Skip step ></a>
 </script>
 
 <script id="sharePlaylistView-template" type="text/x-template">
@@ -118,11 +118,15 @@
 </script>
 
 <script id="myPlaylistsViewTitle-template" type="text/x-template">
-  <h2>My playlists</h2>
+  <div class="main-container">
+    <h2>My playlists</h2>
+    <div class="playlists"></div>
+  </div>
 </script>
 
 <script id="myPlaylistsView-template" type="text/x-template">
-  <a href="#{{user.username}}/{{playlist_url.playlist_url}}"><h3>{{playlist_url.name}}</h3></a>
+  <a class="single-playlist" href="#{{user.username}}/{{playlist_url.playlist_url}}"><h3>{{playlist_url.name}}</h3></a>
+  <p>{{new Date(created_at)}}</p>
 </script>
 
 <script id="playlistOwnerView-template" type="text/x-template">
@@ -140,7 +144,7 @@
 </script>
 
 <script id="songStatsView-template" type="text/x-template">
-  <li class="stat song-stat">Song chosen by:{{song_chosen_by}}</li> 
+  <li class="stat song-stat">Song chosen by: {{song_chosen_by}} | </li> 
   <li class="stat song-stat">Skips: {{skips_on_song}}, {{skips_as_pc}}%</li>
 </script>
 
@@ -149,8 +153,8 @@
     <div class="left">
       <div class="playlist-name">{{playlist_name}}</div>
       <ul class="playlist-stats stats">
-        <li class="stat playlist-stat">Created by: {{creator_name}}</li>
-        <li class="stat playlist-stat">Contributors: {{contributor_count}}</li>
+        <li class="stat playlist-stat">Created by: {{creator_name}} | </li>
+        <li class="stat playlist-stat">Contributors: {{contributor_count}} | </li>
       </ul>
     </div>
     <div class="right">
@@ -176,7 +180,7 @@
 </script>
 
 <script id="playlistGuestView-template" type="text/x-template">
-    <div class="guest-add-songs-container"></div>
     <div class="guest-vote-container"></div>
+    <div class="guest-add-songs-container"></div>
 </script>
 

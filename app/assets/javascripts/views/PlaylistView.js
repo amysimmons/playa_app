@@ -297,6 +297,8 @@ playa.PlaylistView = Backbone.View.extend({
   },
 
   createOrDeleteSkip: function(event){
+    event.stopPropagation();
+    event.stopImmediatePropagation();
     var currentElement = $(event.currentTarget);
     event.preventDefault();
     // debugger;

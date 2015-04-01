@@ -292,7 +292,7 @@ playa.PlaylistView = Backbone.View.extend({
       // delete post request 
 
     var user_id = playa.currentUser.id;
-    var song_id = $(event.currentTarget).parent().parent().data("id");
+    var song_id = $(event.currentTarget).parent().parent().parent().data("id");
     // debugger;
 
     if ( $(event.currentTarget).hasClass("skip") ) {

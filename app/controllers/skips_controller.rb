@@ -47,7 +47,6 @@ class SkipsController < ApplicationController
 
     render :json => { skips_num: skips_num, skips_percentage: skips_percentage }
 
-
   end
 
   def skips_on_user

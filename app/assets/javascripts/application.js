@@ -16,6 +16,7 @@
 //= require backbone
 //= require soundcloud_api
 //= require soundcloud
+//= require moment
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

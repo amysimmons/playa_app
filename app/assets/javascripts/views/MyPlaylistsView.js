@@ -30,7 +30,7 @@ playa.MyPlaylistsView = Backbone.View.extend({
         }
         // debugger
         var myplaylist = myplaylists[i];
-        var playlist_div = $('<div></div>');
+        var playlist_div = $('<div></div>').addClass('playlist-link');
         var myPlaylistsViewTemplate = $('#myPlaylistsView-template').html();
         var myPlaylistsViewHTML = _.template(myPlaylistsViewTemplate);
         playlist_div.html(myPlaylistsViewHTML(options));

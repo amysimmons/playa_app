@@ -126,7 +126,7 @@
 
 <script id="myPlaylistsView-template" type="text/x-template">
   <a class="single-playlist" href="#{{user.username}}/{{playlist_url.playlist_url}}"><h3>{{playlist_url.name}}</h3></a>
-  <p>{{new Date(created_at)}}</p>
+  <p class="playlist-created-at">Created on: {{ moment(created_at).format('MMMM Do YYYY') }}</p>
 </script>
 
 <script id="playlistOwnerView-template" type="text/x-template">

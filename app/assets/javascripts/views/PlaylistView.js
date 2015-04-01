@@ -201,7 +201,7 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
       // adds heading to main
-      $('.guest-add-songs-container').prepend('<h2>Add Songs</h2>');
+      $('.main-container').prepend('<p class="guest-add-songs-p">Submit your SoundCloud URLs below</p>').prepend('<h2 class="guest-add-songs-head">Add Songs</h2>');
 
       // render playlist songs guest view
       var addSongsViewTemplate = $('#addSongsView-template').html();

@@ -30,12 +30,12 @@ playa.PlaylistView = Backbone.View.extend({
     view = this;
 
     playa.playlists.fetch().done(function(){
-
+    console.log('setting creatorName');
       playa.currentPlaylist = playa.playlists.where({playlist_url: url});
       playa.creatorName = name
       playa.currentSongChosenBy = playa.currentPlaylist[0].attributes.user_id
       playa.playlist_url = url
-
+      playa.playlist_id = playa.currentPlaylist[0].attributes.id
 
       // debugger
       var contributors = $.get('/'+playa.creatorName+'/'+playa.playlist_url+'/playlist_contributor_count').done(function(){ 
@@ -43,7 +43,7 @@ playa.PlaylistView = Backbone.View.extend({
       }).done(function(){
 
         // if user is logged in and user owns the playlist show the playlist owner view
-        var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
+        $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(isOwnerOfPlaylist){
           // debugger;
           view.showView(isOwnerOfPlaylist);
         }); 
@@ -55,7 +55,7 @@ playa.PlaylistView = Backbone.View.extend({
 
   showView: function(isOwnerOfPlaylist){
     // debugger;
-    if(isOwnerOfPlaylist.responseJSON === true){
+    if(isOwnerOfPlaylist === true){
 
       // overall owner view template
       var playlistOwnerViewTemplate = $('#playlistOwnerView-template').html();
@@ -74,12 +74,11 @@ playa.PlaylistView = Backbone.View.extend({
 
 
         // show the playlist songs on the page
-        var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
-
-        playa.playlistSongs = playlistSongs.responseJSON;
-      
-      }).done(function(){
-
+      var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(response){
+        // debugger
+        playa.playlistSongs = response;
+        debugger;
+        console.log('!!!', playa.playlistSongs[0]);
         playa.currentSong = playa.playlistSongs[0].iframe
 
         //render player view to show the first song in the shuffled song array
@@ -160,7 +159,7 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     } else {
-
+      debugger
       // render the guest view template 
       var playlistGuestViewTemplate = $('#playlistGuestView-template').html();
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
@@ -183,6 +182,8 @@ playa.PlaylistView = Backbone.View.extend({
 
       // adds heading to main
       $('.guest-add-songs-container').prepend('<h2>Add Songs</h2>')
+
+
 
       // render playlist songs guest view
       var addSongsViewTemplate = $('#addSongsView-template').html();

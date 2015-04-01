@@ -51,9 +51,10 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_songs
-    # binding.pry
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
+    # binding.pry
     shuffled_songs = playlist.songs.shuffle
+    #render :json => { songs: shuffled_songs }
     render :json => shuffled_songs
     # end
   end

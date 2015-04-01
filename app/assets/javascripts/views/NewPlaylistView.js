@@ -26,6 +26,7 @@ playa.NewPlaylistView = Backbone.View.extend({
     event.stopImmediatePropagation();
     var user_id = playa.currentUser.get("id");
     var username = playa.currentUser.get("username").toLowerCase();
+    playa.creatorName = username;
     var name = $('#name').val();
     var song_limit = $('#song-limit').val();
     var playlist = new playa.Playlist({name: name, song_limit: song_limit, user_id: user_id});

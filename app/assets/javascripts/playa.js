@@ -13,7 +13,7 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
     var urls = []
     var playlist_id = playlist_id || playa.currentPlaylist[0].attributes.id
 
-    debugger
+    // debugger
     // playa.currentPlaylist[0].attributes.id || playa.playlist_id
     var user_id = playa.currentUser.get("id");
     var input = $('input');
@@ -33,11 +33,13 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
     // if(isOwnerOfPlaylist.responseJSON === true){
     if ( playa.creatorName === playa.currentUser.get("username") ) {
       playa.router.navigate("shareplaylist", true)
+      console.log('in playa creator view')
     }else {
 
       var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
-        // debugger;
+        debugger;
         playa.playlistView.showView(isOwnerOfPlaylist);
+        console.log('in playa guest view')
       });
 
     }

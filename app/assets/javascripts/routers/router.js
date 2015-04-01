@@ -68,6 +68,13 @@ playa.Router = Backbone.Router.extend({
 
     if (playa.loginNeeded()) return;
 
+    if (playa.destination) {
+      var destination = playa.destination;
+      playa.destination = null;
+      location.hash = destination;
+      return;
+    }
+
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 
 
@@ -124,7 +131,10 @@ playa.Router = Backbone.Router.extend({
     username = username || playa.currentlyPlaying.username;
     playlist_url = playlist_url || playa.currentlyPlaying.playlist_url;
 
-    if (playa.loginNeeded()) return;
+    if (playa.loginNeeded()) {
+      playa.destination = location.hash;
+      return;
+    }
 
     var userLoggedInView = new playa.UserLoggedInView();
     userLoggedInView.render(); 

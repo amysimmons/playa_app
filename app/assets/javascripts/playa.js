@@ -31,13 +31,13 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
       });
     }
     // if(isOwnerOfPlaylist.responseJSON === true){
-    if ( playa.creatorName === playa.currentUser.get("username") ) {
+    if ( playa.creatorName.toLowerCase() === playa.currentUser.get("username").toLowerCase() ) {
       playa.router.navigate("shareplaylist", true)
       console.log('in playa creator view')
     }else {
 
       var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
-        debugger;
+        // debugger;
         playa.playlistView.showView(isOwnerOfPlaylist);
         console.log('in playa guest view')
       });

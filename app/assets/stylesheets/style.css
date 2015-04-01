@@ -40,7 +40,7 @@ header {
   height: 90px;
   background-color: #000;
   color: #FFF;
-  border-top: 8px solid #E33200;
+  /*border-top: 8px solid #E33200;*/
 }
 
 header h1 {
@@ -129,6 +129,7 @@ form div, form button {
 button {
   text-transform: uppercase;
   font-weight: 600;
+  background-color:lightgrey;
 }
 
 input {
@@ -224,6 +225,7 @@ li.stat {
 .skip-btn{
   color: #01B0F0;
   margin-top: 1em;
+  background-color: lightgrey;
 }
 
 .single-playlist {
@@ -252,9 +254,8 @@ li.stat {
   font-size: 0;
 }
 
-
 .skip-step{
-  border: 4px solid #E33200;
+  /*border: 4px solid #E33200;*/
   border-radius: 3px;
   padding: 0.5em;
   height: 75px;
@@ -264,7 +265,8 @@ li.stat {
   margin: 1em auto;
   font-weight: bold;
   text-transform: uppercase;
-  color: #212121;
+  color: #01B0F0;
+
 }
 
 .playlist-link {
@@ -273,6 +275,43 @@ li.stat {
 
 .playlist-created-at{
   color: lightgrey;
+}
+
+.add-songs-form {
+  margin-top: 2em;
+}
+
+.hello {
+  visibility: hidden;
+  color: #fff;
+  font-size: 10px;
+}
+
+.go-to-playlist{
+  border-radius: 3px;
+  padding: 0.5em;
+  height: 75px;
+  width: 400px;
+  padding-top: 1em;
+  display: block;
+  margin: 1em auto;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #01B0F0;
+}
+
+.share-playlist {
+  margin-top: 2em;
+}
+
+.playlist-share-url{
+  color: #01B0F0;
+}
+
+.playlist-share-url:hover{
+  margin-top: 2em;
+  color: #01B0F0;
+  text-decoration: underline;
 }
 
 

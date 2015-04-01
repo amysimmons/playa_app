@@ -70,7 +70,7 @@
 
 <script id="newPlaylistView-template" type="text/x-template">
   <div class="main-container">
-    <h2><span class="step">Step1: </span>Make new playlist</h2> 
+    <h2><span class="step">Step One: </span>Make new playlist</h2> 
     <form> 
       <div> 
         <input id="name" placeholder="Enter playlist name"></input> 
@@ -84,11 +84,11 @@
 </script>
 
 <script id="addSongsHeadingOwnerView-template" type="text/x-template">
-  <h2><span class="step">Step2: </span>Add songs</h2>  
+  <h2><span class="step">Step Two: </span>Add songs</h2>  
 </script>
 
 <script id="addSongsHeadingGuestView-template" type="text/x-template">
-  <h2><span class="step"></span>Add songs......</h2>
+  <h2><span class="step"></span>Add songs</h2>
   <p>Paste the URL of any SoundCloud song</p> 
 </script>
 
@@ -112,9 +112,11 @@
 </script>
 
 <script id="sharePlaylistView-template" type="text/x-template">
-  <h2><span class="step">Step3: </span>Share playlist</h2> 
-  <p>Your playlist URL is: <a href="#{{user.username}}/{{playlist.playlist_url}}">www.playa-app.herokuapp.com/#{{user.username}}/{{playlist.playlist_url}}</a></p>
-  <a href="#{{user.username}}/{{playlist.playlist_url}}" class="go-to-playlist">View Playlist</a>
+  <div class="main-container">
+  <h2><span class="step">Step Three: </span>Share playlist</h2> 
+  <p class="share-playlist">Your playlist URL is: <a class="playlist-share-url" href="https://playa-app.herokuapp.com/#{{user.username}}/{{playlist.playlist_url}}">www.playa-app.herokuapp.com/#{{user.username}}/{{playlist.playlist_url}}</a></p>
+  <a href="#{{user.username}}/{{playlist.playlist_url}}" class="go-to-playlist">View Playlist ></a>
+  </div>
 </script>
 
 <script id="myPlaylistsViewTitle-template" type="text/x-template">
@@ -126,7 +128,7 @@
 
 <script id="myPlaylistsView-template" type="text/x-template">
   <a class="single-playlist" href="#{{user.username}}/{{playlist_url.playlist_url}}"><h3>{{playlist_url.name}}</h3></a>
-  <p class="playlist-created-at">Created on: {{ moment(created_at).format('MMMM Do YYYY') }}</p>
+  <p class="playlist-created-at">Created on {{ moment(created_at).format('MMMM Do YYYY') }}</p>
 </script>
 
 <script id="playlistOwnerView-template" type="text/x-template">
@@ -159,6 +161,7 @@
     </div>
     <div class="right">
       <a href="" class="shuffle" >Shuffle</a>
+      <p class="hello">hello</p>
     </div>
   </div>
   <div class="player">{{iframe}}</div>

@@ -72,20 +72,16 @@
   <div class="main-container">
     <h2><span class="step">Step1: </span>Make new playlist</h2> 
     <form> 
-      <div>
-        <label for="name">Name</label><br> 
+      <div> 
         <input id="name" placeholder="Enter playlist name"></input> 
       </div> 
       <div>
-        <label for="song_limit">No. of songs per guest</label><br> 
-        <input id="song-limit" type="number" min="1" max="100" placeholder="Enter song limit"></input> 
+        <input id="song-limit" type="number" min="1" max="10" placeholder="Number of songs per person"></input> 
       </div>
       <button class="btn new-playlist-btn">Go!</button> 
     </form>  
   </div>
 </script>
-
-  <!-- <h2><span class="step">Step2: </span>Add songs</h2>  -->
 
 <script id="addSongsHeadingOwnerView-template" type="text/x-template">
   <h2><span class="step">Step2: </span>Add songs</h2> 
@@ -130,7 +126,6 @@
 </script>
 
 <script id="playlistOwnerView-template" type="text/x-template">
-  <h2>Playlist owner view</h2>
     <div class="player-container"></div>
     <div class="playlist-stats-container"></div>
     <div class="song-stats-container"></div>
@@ -145,44 +140,43 @@
 </script>
 
 <script id="songStatsView-template" type="text/x-template">
-   <ul class="song-stats stats">
-    <li class="stat song-stat">Song chosen by:{{song_chosen_by}}</li> 
-    <li class="stat song-stat">Skips: {{skips_on_song}}, {{skips_as_pc}}%</li>
-  </ul>
+  <li class="stat song-stat">Song chosen by:{{song_chosen_by}}</li> 
+  <li class="stat song-stat">Skips: {{skips_on_song}}, {{skips_as_pc}}%</li>
 </script>
 
 <script id="playerView-template" type="text/x-template">
-  <div class="playlist-name">{{playlist_name}}</div>
+  <div class="player-info-container">
+    <div class="left">
+      <div class="playlist-name">{{playlist_name}}</div>
+      <ul class="playlist-stats stats">
+        <li class="stat playlist-stat">Created by: {{creator_name}}</li>
+        <li class="stat playlist-stat">Contributors: {{contributor_count}}</li>
+      </ul>
+    </div>
+    <div class="right">
+      <a href="" class="shuffle" >Shuffle</a>
+    </div>
+  </div>
   <div class="player">{{iframe}}</div>
-  <a href="" class="shuffle" >Shuffle</a>
 </script>
 
-  <!-- <a href="/{{creator_name}}/{{playlist_url}}/shuffle_songs" class="shuffle" data-remote=true>Shuffle</a> -->
 <script id="songView-template" type="text/x-template">
   <div class="song-view">
     <div class="song-count"></div>
     <img class="song-image" src="{{song_info.image}}"/>
-    <ul>
-      <li>Song: {{song_info.title}}</li>
-      <li>Artist: {{song_info.artist}} </li>
-      <li>Skips: {{song_skips}}, {{song_skips_pc}}%</li>
-    </ul>
-    <a href="" class="{{skipped}} skip-btn btn">Vote to {{skipped}}</a>
+    <div class="song-info-overlay hide">
+      <ul>
+        <li>Song: {{song_info.title}}</li>
+        <li>Artist: {{song_info.artist}} </li>
+        <li>Skips: {{song_skips}}, {{song_skips_pc}}%</li>
+      </ul>
+      <a href="" class="{{skipped}} skip-btn btn">Vote to {{skipped}}</a>
+    </div>
   </div>
 </script>
 
 <script id="playlistGuestView-template" type="text/x-template">
-  <h2>playlist guest view</h2>
     <div class="guest-add-songs-container"></div>
     <div class="guest-vote-container"></div>
 </script>
 
-
-  <!--      // var options = {
-        //   playlist_url: playa.myplaylists.toJSON()[i],
-        //   user: playa.currentUser.toJSON()
-        // } -->
-
-
-<!-- <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F293&show_artwork=true&client_id=42df4f88b96074520cc64f4be69e3ab4"></iframe>
- -->

@@ -47,7 +47,6 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
 
   }
 
-
   playa.playlists = new playa.Playlists();
   playa.songs = new playa.Songs();
   playa.playlistSongs = new playa.PlaylistSongs();

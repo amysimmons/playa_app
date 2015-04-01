@@ -23,7 +23,8 @@ playa.PlaylistView = Backbone.View.extend({
     "click .skip-btn": 'createOrDeleteSkip',
     'click .add-songs-btn': function (event) {
       playa.createSongs(event);
-    }
+    }, 
+    'mouseover .song-view': 'toggleInfo'
   },
 
   render: function(name, url) {
@@ -51,6 +52,7 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     });
+
   },
 
   showView: function(isOwnerOfPlaylist){
@@ -68,9 +70,9 @@ playa.PlaylistView = Backbone.View.extend({
         creator_name: playa.creatorName
       }
 
-      var playlistStatsViewTemplate = $('#playlistStatsView-template').html();
-      var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
-      $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
+      // var playlistStatsViewTemplate = $('#playlistStatsView-template').html();
+      // var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
+      // $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
 
 
         // show the playlist songs on the page
@@ -86,7 +88,8 @@ playa.PlaylistView = Backbone.View.extend({
           playlist_name: playa.currentPlaylist[0].attributes.name,
           creator_name: playa.creatorName,
           playlist_url: playa.playlist_url,
-          iframe: playa.currentSong
+          iframe: playa.currentSong,
+          contributor_count: playa.currentPlaylistContributors
         }
  
         var playerViewTemplate = $('#playerView-template').html();
@@ -166,7 +169,7 @@ playa.PlaylistView = Backbone.View.extend({
               }
               var songStatsViewTemplate = $('#songStatsView-template').html();
               var songStatsViewHTML = _.template(songStatsViewTemplate);
-              $('.song-stats-container').html(songStatsViewHTML(songStatsOptions));  
+              $('.playlist-stats').append(songStatsViewHTML(songStatsOptions));  
                
             })
 
@@ -352,9 +355,26 @@ playa.PlaylistView = Backbone.View.extend({
     playa.initWidget();
 
     console.log('end of next track play fn)');
+  },
+
+  toggleInfo: function(){
+
+    // var $songView = $('.song-view');
+
+    // debugger
+
+    // $($songView.children[2]).removeClass('hide')
+
+    // $('.song-view').children('.song-info-overlay').toggleClass('hide');
+    // $(this).('.song-info-overlay').toggleClass('hide');
+
+     // $('.song-info-overlay').toggleClass('hide');
+     console.log('hovering');
+     // console.log(this);
   }
 
 });
+
 
 //   createNewSecret: function(event){
 //     event.preventDefault();

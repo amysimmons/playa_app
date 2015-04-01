@@ -51,17 +51,17 @@ header {
   height: 90px;
   background-color: #000;
   color: #FFF;
-  border-top: 8px solid #002A4A;
+  border-top: 8px solid #E33200;
 }
 
 header h1 {
   padding-left: 0.5em;
-  float: left;
+  display: inline-block;
   font-family: 'Righteous', cursive;
 }
 
 header nav {
-  float: right;
+  display: inline-block;
 }
 
 .title i {
@@ -118,7 +118,7 @@ h2 {
 }
 
 form input, form button {
-  border: 4px solid #DD1C3A;
+  border: 4px solid #E33200;
   width: 400px;
   height: 75px;
   font-size: 22px;
@@ -130,6 +130,100 @@ form input, form button {
 form div, form button {
     margin-top: 1em;
 }
+
+.playlist-name {
+  font-size: 30px;
+}
+
+li.stat {
+  color: lightgrey;
+  display: inline;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.left {
+  width: 48%;
+  display: inline-block;
+}
+
+.right{
+   width: 48%;
+  text-align:right;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.shuffle {
+  border: 4px solid #E33200;
+    border-radius: 3px;
+    padding: 0.5em;
+}
+
+.player-info-container{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.songs-container > div {
+  width: 33%;
+  display: inline-block;
+}
+
+/*.song-view {
+  width: 100%;
+  height: 100%;
+}*/
+
+.song-view img {
+  width: 100%;
+}
+
+.song-view {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.song-image {
+  width: 100%;
+  height: 100%%;
+  background-size: cover;
+}
+
+.song-info-overlay {
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  width: 100%;
+  /*height: 20%;*/
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  background-color: rgba(0,0,0, 0.8);
+  color: #fff;
+  padding: 0em;
+  padding: 1em;
+}
+
+.song-info-overlay ul{
+  list-style-type: none;
+}
+
+.hide {
+  /*display: none;*/
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

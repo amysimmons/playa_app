@@ -185,6 +185,23 @@ playa.PlaylistView = Backbone.View.extend({
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
       this.$el.html(playlistGuestViewHTML);
 
+      // render top template
+
+    
+
+      //render player view to show the first song in the shuffled song array
+      var guestTopOptions = {
+        playlist_name: playa.currentPlaylist[0].attributes.name,
+        creator_name: playa.creatorName,
+        contributor_count: playa.currentPlaylistContributors
+      }
+        // debugger
+
+      var playlistTopGuestViewTemplate = $('#playlistTopGuestView-template').html();
+      var playlistTopGuestViewHTML = _.template(playlistTopGuestViewTemplate);
+      $('.guest-playlist-name-stats-container').html(playlistTopGuestViewHTML(guestTopOptions));
+
+
       // render the add songs form
       var addSongsViewTemplate = $('#addSongsView-template').html();
       var addSongsViewHTML = _.template(addSongsViewTemplate);
@@ -298,16 +315,16 @@ playa.PlaylistView = Backbone.View.extend({
     if ( $(event.currentTarget).hasClass("skip") ) {
       // console.log("It had the class skip, save it.");
       // debugger;
-      var skip = new playa.Skip({ user_id: user_id, song_id: song_id })
-      skip.save().done(function(){
+      var skip = new playa.Skip({ user_id: user_id, song_id: song_id, playlist_url: playa.playlist_url })
+      skip.save().done(function(response){
         // debugger;
         // Change the text to "Unskip"
         // Remove the class skip and add unskip
         // debugger;
-
+        // debugger;
         currentElement.text("Vote to unskip");
         currentElement.removeClass("skip").addClass("unskip");
-
+        $( currentElement.parent().children("ul").children("li")[2] ).text("Skips: " + response.skips_num + ", " + response.skips_percentage + "%")
         // debugger;
         // get skip id and add id to skip
         playa.skips.add(skip);
@@ -323,11 +340,13 @@ playa.PlaylistView = Backbone.View.extend({
         data: {
           _method: "DELETE",
           user_id: user_id,
-          song_id: song_id
+          song_id: song_id, 
+          playlist_url: playa.playlist_url
         },
         success: function (response) {
           currentElement.text("Vote to skip");
           currentElement.removeClass("unskip").addClass("skip");
+          $( currentElement.parent().children("ul").children("li")[2] ).text("Skips: " + response.skips_num + ", " + response.skips_percentage + "%")
         }
       })
     }

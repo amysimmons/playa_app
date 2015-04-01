@@ -192,7 +192,23 @@
 </script>
 
 <script id="playlistGuestView-template" type="text/x-template">
+    <div class="guest-playlist-name-stats-container"></div>
     <div class="guest-vote-container"></div>
     <div class="guest-add-songs-container"></div>
 </script>
+
+<script id="playlistTopGuestView-template" type="text/x-template">
+<div class="player-info-container">
+  <div class="left">
+    <div class="playlist-name">{{playlist_name}}</div>
+    <ul class="playlist-stats stats">
+      <li class="stat playlist-stat">Created by: {{creator_name}} | </li>
+      <li class="stat playlist-stat">Contributors: {{contributor_count}} | </li>
+    </ul>
+  </div>
+</div>
+</script>
+
+
+
 

@@ -9,7 +9,8 @@ class SkipsController < ApplicationController
   def create
     @skip = Skip.new skip_params
     if @skip.save
-      render :json => @skip
+      skips_on_song(true, params["song_id"])
+      render :json => { skip: @skip, skips_num: @skips_num, skips_percentage: @skips_percentage }
     else
       render :json => @skip.errors, status: :unprocessable_entity
     end
@@ -22,31 +23,32 @@ class SkipsController < ApplicationController
   def destroy
     skip = Skip.where( :user_id => params["user_id"], :song_id => params["song_id"] )
     if Skip.destroy( skip[0].id )
-      render :json => { status: "OK" }
+      skips_on_song(true, params["song_id"])
+      render :json => { status: "OK", skips_num: @skips_num, skips_percentage: @skips_percentage }
     else
       render :json => { status: "NOT OK" }
     end
 
-    # skip.destroy
-
   end
 
-  def skips_on_song
-    # binding.pry
+  def skips_on_song(called = false, id = false)
+    # binding.pry if called
     #gets the number of skips on a particular song
-    skips_num = Song.find_by(:id => params[:id]).skips.count
+    @skips_num = Song.find_by(:id => params[:id] || id).skips.count
 
     # gets the number of contributors to that playlist
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     count = playlist.songs.map{|song|song.user_id}.uniq.count
  
     # calculates percenate of users who have skipped the song
-    skips_percentage = (skips_num/count.to_f)*100
+    @skips_percentage = (@skips_num/count.to_f)*100
 
     # render :json => skips_percentage
-
-    render :json => { skips_num: skips_num, skips_percentage: skips_percentage }
-
+    #
+    # binding.pry if called
+    if !called
+      render :json => { skips_num: @skips_num, skips_percentage: @skips_percentage }
+    end
   end
 
   def skips_on_user

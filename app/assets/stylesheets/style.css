@@ -338,4 +338,8 @@ li.stat {
 .blue {
   color: #01B0F0;
 }
+
+.player-info-container{
+  border-bottom: 3px solid #E33200;
+}
   

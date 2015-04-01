@@ -77,9 +77,9 @@ playa.PlaylistView = Backbone.View.extend({
 
         // show the playlist songs on the page
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(response){
-        // debugger
+   
         playa.playlistSongs = response;
-       
+            // debugger
         console.log('!!!', playa.playlistSongs[0]);
         playa.currentSong = playa.playlistSongs[0].iframe
 
@@ -312,6 +312,9 @@ playa.PlaylistView = Backbone.View.extend({
         // get skip id and add id to skip
         playa.skips.add(skip);
         playa.skips.fetch();
+
+
+        // debugger;
         // console.log("Yep, that save worked.");
       });
     } else {
@@ -328,6 +331,10 @@ playa.PlaylistView = Backbone.View.extend({
         }
       })
     }
+
+    // trying to rerender skips:
+    // var playlistView = new playa.PlaylistView({collection: playa.skips});
+    // playlistView.render();
   },
 
   playNextTrack: function(event){
@@ -374,88 +381,3 @@ playa.PlaylistView = Backbone.View.extend({
   }
 
 });
-
-
-//   createNewSecret: function(event){
-//     event.preventDefault();
-//     var userContent = this.$('textarea').val();
-//     var secret = new whisper.Secret({content: userContent})
-
-
-//     secret.save();
-//     whisper.secrets.add(secret);
-
-//     this.$('textarea').val('');
-
-//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
-//     secretsView.render();
-
-//   },
-
-  // createSongs: function(event){
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   event.stopImmediatePropagation();
-
-  //   var urls = []
-  //   var playlist_id = playa.playlist_id
-  //   var user_id = playa.currentUser.get("id");
-  //   var input = $('input');
-
-  //   $.each(input, function() {
-  //     var val = $(this).val();
-  //     urls.push(val);
-  //   });
-
-  //   for (var i = 0; i < urls.length; i++) {
-  //     var url = urls[i]
-  //     var song = new playa.Song({url: url, playlist_id: playlist_id, user_id: user_id})
-  //     song.save().done(function(){
-  //       playa.songs.add(song);
-  //     });
-  //   }
-  //   playa.router.navigate("shareplaylist", true)
-  // }
-
-
-// whisper.NewSecretView = Backbone.View.extend({
-//   el:'#new-secret',
-//   events: {
-//     'submit form': 'createNewSecret',
-//     'click button': 'stopPolling'
-//   },
-//   render: function(){
-//     // make the view available
-//     var html = $('#newSecretTemplate').html();
-//     this.$el.html(html);
-//   },
-//   createNewSecret: function(event){
-//     event.preventDefault();
-//     var userContent = this.$('textarea').val();
-//     var secret = new whisper.Secret({content: userContent})
-
-
-//     secret.save();
-//     whisper.secrets.add(secret);
-
-//     this.$('textarea').val('');
-
-//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
-//     secretsView.render();
-
-//   },
-//   stopPolling: function(event){
-//     event.preventDefault();
-//     whisper.secrets.stop();
-//   }
-
-// });
-
-
-// maybe i need to do somehitn glike this after i shuffle the songs?
-//     var secretsView = new whisper.SecretsView({collection: whisper.secrets});
-//     secretsView.render();
-
-
-
-

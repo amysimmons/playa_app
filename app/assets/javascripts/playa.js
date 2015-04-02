@@ -11,10 +11,7 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
     event.stopImmediatePropagation();
 
     var urls = []
-    var playlist_id = playlist_id || playa.currentPlaylist[0].attributes.id
-
-    // debugger
-    // playa.currentPlaylist[0].attributes.id || playa.playlist_id
+    var playlist_id = playlist_id || playa.currentPlaylist[0].attributes.id;
     var user_id = playa.currentUser.get("id");
     var input = $('input');
 
@@ -30,20 +27,18 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
         playa.songs.add(song);
       });
     }
-    // if(isOwnerOfPlaylist.responseJSON === true){
+
     if ( playa.creatorName.toLowerCase() === playa.currentUser.get("username").toLowerCase() ) {
       playa.router.navigate("shareplaylist", true)
       console.log('in playa creator view')
     }else {
 
       var isOwnerOfPlaylist = $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(response){
-        // debugger;
         playa.playlistView.showView(isOwnerOfPlaylist);
         console.log('in playa guest view')
       });
 
     }
-    // }
 
   }
 
@@ -59,5 +54,3 @@ playa.createSongs = function(event, playlist_id, isOwnerOfPlaylist){
   playa.router = new playa.Router();
   Backbone.history.start();
 });
-
-  // playa.playlistSongs = new playa.Songs({playlist_url: 'hey-girl-you-rock'});

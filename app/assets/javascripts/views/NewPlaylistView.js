@@ -35,9 +35,6 @@ playa.NewPlaylistView = Backbone.View.extend({
         console.log(r);
         playa.playlists.add(playlist);
         playa.playlists.fetch().done(function(){
-          // username = username.toLowerCase();
-          // username = username.replace(/ /gi, "-");
-          // username = username.replace(/[^-A-Za-z0-9]+/g, '');
           var name = playlist.attributes.name;
           name = name.replace(/ /gi, "-");
           name = name.replace(/[^-A-Za-z0-9]+/g, '');

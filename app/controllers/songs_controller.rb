@@ -53,16 +53,16 @@ class SongsController < ApplicationController
 
 end
 
-    # // http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-UUx10KOWIE&format=xml
+  # // http://www.youtube.com/oembed?url=http%3A//www.youtube.com/watch?v%3D-UUx10KOWIE&format=xml
 
-    # // resource = OEmbed::Providers::Youtube.get("http://www.youtube.com/watch?v=2BYXBC8WQ5k")
-    # // resource.video? #=> true
-    # // resource.thumbnail_url #=> "http://i3.ytimg.com/vi/2BYXBC8WQ5k/hqdefault.jpg"
-    # // resource.html #=> <<-HTML
-    # // <object width="425" height="344">
-    # // <param name="movie" value="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1"></param>
-    # // <param name="allowFullScreen" value="true"></param>
-    # // <param name="allowscriptaccess" value="always"></param>
-    # // <embed src="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1" type="application/x-shockwave-flash" width="425" height="344" allowscriptaccess="always" allowfullscreen="true"></embed>
-    # // </object>
-    # // HTML
+  # // resource = OEmbed::Providers::Youtube.get("http://www.youtube.com/watch?v=2BYXBC8WQ5k")
+  # // resource.video? #=> true
+  # // resource.thumbnail_url #=> "http://i3.ytimg.com/vi/2BYXBC8WQ5k/hqdefault.jpg"
+  # // resource.html #=> <<-HTML
+  # // <object width="425" height="344">
+  # // <param name="movie" value="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1"></param>
+  # // <param name="allowFullScreen" value="true"></param>
+  # // <param name="allowscriptaccess" value="always"></param>
+  # // <embed src="http://www.youtube.com/v/2BYXBC8WQ5k?fs=1" type="application/x-shockwave-flash" width="425" height="344" allowscriptaccess="always" allowfullscreen="true"></embed>
+  # // </object>
+  # // HTML

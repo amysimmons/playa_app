@@ -38,14 +38,12 @@ playa.PlaylistView = Backbone.View.extend({
       playa.playlist_url = url
       playa.playlist_id = playa.currentPlaylist[0].attributes.id
 
-      // debugger
       var contributors = $.get('/'+playa.creatorName+'/'+playa.playlist_url+'/playlist_contributor_count').done(function(){ 
         playa.currentPlaylistContributors = contributors.responseText;
       }).done(function(){
 
         // if user is logged in and user owns the playlist show the playlist owner view
         $.get('/is_playlist_owner', { playlist_url: playa.playlist_url }).done(function(isOwnerOfPlaylist){
-          // debugger;
           view.showView(isOwnerOfPlaylist);
         }); 
 
@@ -56,7 +54,6 @@ playa.PlaylistView = Backbone.View.extend({
   },
 
   showView: function(isOwnerOfPlaylist){
-    // debugger;
     if(isOwnerOfPlaylist === true){
 
       // overall owner view template
@@ -70,16 +67,10 @@ playa.PlaylistView = Backbone.View.extend({
         creator_name: playa.creatorName
       }
 
-      // var playlistStatsViewTemplate = $('#playlistStatsView-template').html();
-      // var playlistStatsViewHTML = _.template(playlistStatsViewTemplate);
-      // $('.playlist-stats-container').html(playlistStatsViewHTML(playlistStatsOptions));
-
-
         // show the playlist songs on the page
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(response){
    
         playa.playlistSongs = response;
-            // debugger
         console.log('!!!', playa.playlistSongs[0]);
         playa.currentSong = playa.playlistSongs[0].iframe
 
@@ -108,7 +99,6 @@ playa.PlaylistView = Backbone.View.extend({
             // the current user's skips include that song id
 
             var songOptions = function (song) {
-              // debugger
               var skipped = "skip";
               if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
                 skipped = "unskip";
@@ -128,7 +118,6 @@ playa.PlaylistView = Backbone.View.extend({
                   skipped: skipped
                 }
 
-                // debugger;
                 var song_div = $('<div data-id=' + song.id + '></div>');
                 var songViewTemplate = $('#songView-template').html();
                 var songViewHTML = _.template(songViewTemplate);
@@ -179,15 +168,12 @@ playa.PlaylistView = Backbone.View.extend({
       });
 
     } else {
-      // debugger
       // render the guest view template 
       var playlistGuestViewTemplate = $('#playlistGuestView-template').html();
       var playlistGuestViewHTML = _.template(playlistGuestViewTemplate);
       this.$el.html(playlistGuestViewHTML);
 
       // render top template
-
-    
 
       //render player view to show the first song in the shuffled song array
       var guestTopOptions = {
@@ -207,7 +193,6 @@ playa.PlaylistView = Backbone.View.extend({
       var addSongsViewHTML = _.template(addSongsViewTemplate);
       $('.guest-add-songs-container').html(addSongsViewHTML);
 
-      // debugger
       // calcualte the playa.song_limit for this playlist
 
       // renders input field specified number of times for the playlist
@@ -227,7 +212,6 @@ playa.PlaylistView = Backbone.View.extend({
 
       // SONGS GUEST VIEW 
       var playlistSongs = $.get('/playlists/' + playa.playlist_url + '/songs').done(function(){
-        // debugger
         playa.playlistSongs = playlistSongs.responseJSON;
 
         // get songs for current playlist
@@ -241,7 +225,6 @@ playa.PlaylistView = Backbone.View.extend({
             // the current user's skips include that song id
 
             var songOptions = function (song) {
-              // debugger
               var skipped = "skip";
               if ( playa.skips.where({ song_id: song.id }).length != 0 ) {
                 skipped = "unskip";
@@ -269,9 +252,6 @@ playa.PlaylistView = Backbone.View.extend({
                 song_div.html(songViewHTML(songViewOptions));
                 song_div.appendTo($('.guest-vote-container'));
 
-                // put this in a function that says render track and call that function 
-                // and pass in song 
-
               });
             }
             songOptions(song);
@@ -288,11 +268,6 @@ playa.PlaylistView = Backbone.View.extend({
 
     console.log('shuffling');
     playa.router.playlist();
-    // playa.showView();
-
-    // debugger
-    // run this on shuffle button click
-    // playa.playlistSongs.reset( playa.playlistSongs.shuffle(), {silent: true} );
 
   },
 
@@ -301,7 +276,6 @@ playa.PlaylistView = Backbone.View.extend({
     event.stopImmediatePropagation();
     var currentElement = $(event.currentTarget);
     event.preventDefault();
-    // debugger;
     // console.log('skipping or unskipping');
 
     // if button has class of skipped
@@ -312,28 +286,20 @@ playa.PlaylistView = Backbone.View.extend({
 
     var user_id = playa.currentUser.id;
     var song_id = $(event.currentTarget).parent().parent().parent().data("id");
-    // debugger;
 
     if ( $(event.currentTarget).hasClass("skip") ) {
       // console.log("It had the class skip, save it.");
-      // debugger;
       var skip = new playa.Skip({ user_id: user_id, song_id: song_id, playlist_url: playa.playlist_url })
       skip.save().done(function(response){
-        // debugger;
         // Change the text to "Unskip"
         // Remove the class skip and add unskip
-        // debugger;
-        // debugger;
         currentElement.text("Vote to unskip");
         currentElement.removeClass("skip").addClass("unskip");
         $( currentElement.parent().children("ul").children("li")[2] ).text("Skips: " + response.skips_num + ", " + response.skips_percentage + "%")
-        // debugger;
+
         // get skip id and add id to skip
         playa.skips.add(skip);
         playa.skips.fetch();
-
-
-        // debugger;
         // console.log("Yep, that save worked.");
       });
     } else {
@@ -352,15 +318,10 @@ playa.PlaylistView = Backbone.View.extend({
         }
       })
     }
-
-    // trying to rerender skips:
-    // var playlistView = new playa.PlaylistView({collection: playa.skips});
-    // playlistView.render();
   },
 
   playNextTrack: function(event){
     console.log('playing next track')
-    // debugger
 
     // rearrange songview
     $songs = $('.songs-container')[0]
@@ -375,7 +336,6 @@ playa.PlaylistView = Backbone.View.extend({
 
    // reload the iframe  
     i = playa.playlistSongs[0].iframe
-    // debugger;
     var str = $(i).attr("src");
     str += "&auto_play=true";
     $('iframe').parent().html( $(i).attr("src", str) );
@@ -383,22 +343,6 @@ playa.PlaylistView = Backbone.View.extend({
     playa.initWidget();
 
     console.log('end of next track play fn)');
-  },
-
-  toggleInfo: function(){
-
-    // var $songView = $('.song-view');
-
-    // debugger
-
-    // $($songView.children[2]).removeClass('hide')
-
-    // $('.song-view').children('.song-info-overlay').toggleClass('hide');
-    // $(this).('.song-info-overlay').toggleClass('hide');
-
-     // $('.song-info-overlay').toggleClass('hide');
-     console.log('hovering');
-     // console.log(this);
   }
 
 });

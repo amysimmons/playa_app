@@ -18,20 +18,11 @@ Rails.application.routes.draw do
 
   get '/playlists/:playlist_url/songs' => 'playlists#playlist_songs'
 
-
-  # get '/:username/:playlist_url/shuffle_songs' => 'playlists#playlist_songs'
-
   get '/:username/:playlist_url/playlist_contributor_count' => 'playlists#playlist_contributor_count'
-
-  # get '/shuffle' => 'playlists#shuffle_songs'
 
   get '/:username/:playlist_url/current_song_chosen_by' => 'playlists#current_song_chosen_by'
 
   delete '/skips' => 'skips#destroy'
-  # resources :songs do
-  #   # /songs/75/skip
-  #   get '/skip' => 'skips_on_song'
-  # end
 
   get '/:username/:playlist_url/:id/skips_on_song' => 'skips#skips_on_song'
 

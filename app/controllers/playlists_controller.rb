@@ -44,14 +44,12 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_contributor_count
-    # binding.pry
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     count = playlist.songs.map{|song|song.user_id}.uniq.count
     render :json => count
   end
 
   def playlist_songs
-    # binding.pry
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     shuffled_songs = playlist.songs.shuffle
 
@@ -69,13 +67,10 @@ class PlaylistsController < ApplicationController
     end
      # go through each song, if the song is in skipped songs we reject it
     shuffled_songs.reject! { |song| skipped_songs.include? song }
-    # binding.pry
-    #render :json => { songs: shuffled_songs }
     render :json => shuffled_songs
   end
 
   def current_song_chosen_by
-    # binding.pry
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     first_song_chosen_by = playlist.songs[0].user.username
     render :json => { chosen_by: first_song_chosen_by }

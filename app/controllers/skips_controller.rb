@@ -1,8 +1,6 @@
 class SkipsController < ApplicationController
 
   def index
-    # binding.pry
-    # @skips = Skip.where :user_id => @current_user.id
     render :json => @current_user.skips
   end
 
@@ -32,7 +30,6 @@ class SkipsController < ApplicationController
   end
 
   def skips_on_song(called = false, id = false)
-    # binding.pry if called
     #gets the number of skips on a particular song
     @skips_num = Song.find_by(:id => params[:id] || id).skips.count
 
@@ -44,8 +41,6 @@ class SkipsController < ApplicationController
     @skips_percentage = (@skips_num/count.to_f)*100
 
     # render :json => skips_percentage
-    #
-    # binding.pry if called
     if !called
       render :json => { skips_num: @skips_num, skips_percentage: @skips_percentage }
     end

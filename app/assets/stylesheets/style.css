@@ -29,7 +29,6 @@ ul {
 }
 
 body {
-  /*font-family: 'Hind', sans-serif;*/
   font-family: 'Ubuntu', sans-serif;
   font-size: 22px;
   color: #212121;
@@ -108,18 +107,12 @@ nav li:hover {
   margin-bottom: 80px;
 }
 
-h2 {
-  /*color: #002A4A;*/
-}
-
 form input, form button {
   border: 4px solid #E33200;
   width: 400px;
   height: 75px;
   font-size: 22px;
   border-radius: 3px;
-
-  /*background-color: #FFF1CE;*/
 }
 
 form div, form button {
@@ -204,7 +197,6 @@ li.stat {
   display: block;
   position: absolute;
   width: 100%;
-  /*height: 20%;*/
   bottom: 0%;
   left: 0%;
   right: 0%;
@@ -216,10 +208,6 @@ li.stat {
 
 .song-info-overlay ul{
   list-style-type: none;
-}
-
-.hide {
-  /*display: none;*/
 }
 
 .skip-btn{
@@ -254,7 +242,6 @@ li.stat {
 }
 
 .skip-step{
-  /*border: 4px solid #E33200;*/
   border-radius: 3px;
   padding: 0.5em;
   height: 75px;

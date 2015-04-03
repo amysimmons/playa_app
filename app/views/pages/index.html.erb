@@ -22,7 +22,7 @@
     <h2>Sign up</h2> 
     <form> 
       <div>
-        <input id="username" pattern=".{5,15}" placeholder="Enter your username" required></input> 
+        <input id="username" pattern=".{5,15}" placeholder="Enter a username" required></input> 
       </div> 
       <div>
         <input id="email" placeholder="Enter your email" required></input> 
@@ -44,7 +44,7 @@
     <nav>
       <div class="nav-links">
         <ul>
-          <li class="nav-link nav-link-username">{{username}}</li>
+          <li class="nav-link nav-link-username">Welcome {{username}}!</li>
           <li class="nav-link nav-link-new-playlist"><a href="#newplaylist">New playlist</a></li>
           <li class="nav-link nav-link-my-playlists"><a href="#myplaylists">My playlists</a></li>
           <li class="nav-link nav-link-log-out"><a href="logout">Log out</a></li>
@@ -179,6 +179,7 @@
 <script id="songView-template" type="text/x-template">
   <div class="song-view">
     <div class="song-count"></div>
+    <a class="link-to-song" href="{{song_info.url}}" target="_blank"><i class="fa fa-3x fa-music"></i></a>
     <img class="song-image" src="{{song_info.image}}"/>
     <div class="song-info-overlay hide">
       <ul>

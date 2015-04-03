@@ -39,7 +39,7 @@ header {
   height: 90px;
   background-color: #000;
   color: #FFF;
-  border-top: 3px solid #E33200;
+  border-top: 3px solid #ff3a01;
 }
 
 header h1 {
@@ -75,6 +75,7 @@ nav ul {
 nav li {
   display: inline-block;
   margin: 20px 10px;
+  padding-bottom: 2px;
 }
 
 nav a {
@@ -87,16 +88,17 @@ nav a {
   vertical-align: middle;
 }
 
+nav li:hover {
+  border-bottom: 3px solid #01B0F0;
+}
+
 .nav-link-username {
-  text-transform: uppercase;
   font-weight: bold;
   font-size: 18px;
 }
 
-nav li:hover {
-  padding-bottom: 2px;
-  border-bottom: 3px solid #01B0F0;
-
+.nav-link-username:hover {
+  border-bottom: 0px;
 }
 
 .main-container {
@@ -108,7 +110,7 @@ nav li:hover {
 }
 
 form input, form button {
-  border: 4px solid #E33200;
+  border: 4px solid #ff3a01;
   width: 400px;
   height: 75px;
   font-size: 22px;
@@ -153,7 +155,7 @@ li.stat {
 }
 
 .shuffle {
-  border: 4px solid #E33200;
+  border: 4px solid #ff3a01;
   border-radius: 3px;
   padding: 0.5em;
 }
@@ -213,6 +215,22 @@ li.stat {
 .skip-btn{
   color: #01B0F0;
   margin-top: 1em;
+}
+
+.link-to-song{
+  display: block;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  color: #fff;
+  background-color: #ff3a01;
+  width: 15%;
+  height: 15%;
+}
+
+.link-to-song i{
+  font-size: 40px;
+  padding: 2px;
 }
 
 .single-playlist {
@@ -327,6 +345,7 @@ li.stat {
 }
 
 .player-info-container{
-  border-bottom: 3px solid #E33200;
+  border-bottom: 3px solid #ff3a01;
 }
+
   

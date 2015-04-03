@@ -224,13 +224,12 @@ li.stat {
   right: 0%;
   color: #fff;
   background-color: #ff3a01;
-  width: 15%;
-  height: 15%;
 }
 
 .link-to-song i{
   font-size: 40px;
   padding: 2px;
+  padding: 0.1em;
 }
 
 .single-playlist {

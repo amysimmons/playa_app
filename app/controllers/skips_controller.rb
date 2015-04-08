@@ -37,10 +37,9 @@ class SkipsController < ApplicationController
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     count = playlist.songs.map{|song|song.user_id}.uniq.count
  
-    # calculates percenate of users who have skipped the song
+    # calculate percenate of users who have skipped the song
     @skips_percentage = (@skips_num/count.to_f)*100
 
-    # render :json => skips_percentage
     if !called
       render :json => { skips_num: @skips_num, skips_percentage: @skips_percentage }
     end
@@ -51,7 +50,7 @@ class SkipsController < ApplicationController
     skips_num = User.find(:id).skips.count
     songs_num = User.find(:id).songs.count
 
-    # calculates the user's skip rate
+    # calculate the user's skip rate
     skips_percentage = (skips_num/songs_num.to_f)*100
 
     render :json => skips_percentage

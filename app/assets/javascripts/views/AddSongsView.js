@@ -4,7 +4,7 @@ playa.AddSongsView = Backbone.View.extend({
   el: '#main',
   events: {
     "click .add-songs-btn": function (event) {
-      var playlist_id = playa.playlist_id
+      var playlist_id = playa.playlist_id;
       playa.createSongs(event, playlist_id);
     }
   },

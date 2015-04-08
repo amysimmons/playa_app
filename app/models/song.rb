@@ -23,9 +23,7 @@ class Song < ActiveRecord::Base
   has_many :skips
   belongs_to :user
   belongs_to :playlist
-
-  # has_many :users, through: :skips
-
+  
   validates :url, :presence => true
   validates :iframe, :presence => true, :if => :soundcloud_song?
 

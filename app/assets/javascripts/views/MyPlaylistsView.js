@@ -18,6 +18,7 @@ playa.MyPlaylistsView = Backbone.View.extend({
 
     var view = this
 
+    // renders all of a users playlists on the page in a list
     playa.myplaylists.fetch().done(function(){
 
       var myplaylists = playa.myplaylists.toJSON();
@@ -28,7 +29,6 @@ playa.MyPlaylistsView = Backbone.View.extend({
           user: playa.currentUser.toJSON(),
           created_at: myplaylists[i].created_at
         }
-        // debugger
         var myplaylist = myplaylists[i];
         var playlist_div = $('<div></div>').addClass('playlist-link');
         var myPlaylistsViewTemplate = $('#myPlaylistsView-template').html();

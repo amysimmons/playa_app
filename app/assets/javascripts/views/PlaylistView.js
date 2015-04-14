@@ -23,6 +23,7 @@ playa.PlaylistView = Backbone.View.extend({
     "click .skip-btn": 'createOrDeleteSkip',
     'click .add-songs-btn': function (event) {
       playa.createSongs(event);
+      console.log('im handingline it from playlist view');
     }, 
     'mouseover .song-view': 'toggleInfo'
   },
@@ -187,7 +188,7 @@ playa.PlaylistView = Backbone.View.extend({
 
 
       // render the add songs form
-      var addSongsViewTemplate = $('#addSongsView-template').html();
+      var addSongsViewTemplate = $('#addSongsGuestView-template').html();
       var addSongsViewHTML = _.template(addSongsViewTemplate);
       $('.guest-add-songs-container').html(addSongsViewHTML);
 

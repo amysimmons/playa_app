@@ -29,14 +29,11 @@ playa.LoginView = Backbone.View.extend({
       var userLoggedInView = new playa.UserLoggedInView(playa.currentUser);
       userLoggedInView.render(); // if this has el: '#main', it will replace the old appView
 
-      // debugger
-
       playa.router.navigate("newplaylist", true)
     }).error(function(){
      // leave form on page and prepend an error msg to main 
       var errorMsg = $('<p class="error-msg">Wrong username or password</p>');
-      $('.error-msg').remove();
-      $('form').prepend(errorMsg);
+      $('.login-error').html(errorMsg);
     });
 
   }

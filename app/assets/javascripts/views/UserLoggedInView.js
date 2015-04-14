@@ -11,6 +11,7 @@ playa.UserLoggedInView = Backbone.View.extend({
     var userLoggedInViewTemplate = $('#userLoggedInView-template').html();
     var userLoggedInViewHTML = _.template(userLoggedInViewTemplate);
     this.$el.html(userLoggedInViewHTML(playa.currentUser.toJSON()));
+
   },
 
   logUserOut: function(event){

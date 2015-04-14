@@ -42,8 +42,7 @@ playa.SignupView = Backbone.View.extend({
 
      // leave form on page and prepend an error msg to main 
       var errorMsg = $('<p>Something went wrong</p>');
-      $('form').prepend(errorMsg);
-
+      $('.signup-error').html(errorMsg);
     });
 
   }

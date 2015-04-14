@@ -50,6 +50,7 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_songs
+
     playlist = Playlist.find_by(:playlist_url => params[:playlist_url])
     shuffled_songs = playlist.songs.shuffle
 

@@ -3,7 +3,8 @@ playa.UserLoggedInView = Backbone.View.extend({
 
   el: '#header',
   events: {
-    "click .nav-link-log-out": 'logUserOut'
+    "click .nav-link-log-out": 'logUserOut',
+    "click .title": 'showHomeView'
   },
 
   render: function() {
@@ -11,6 +12,10 @@ playa.UserLoggedInView = Backbone.View.extend({
     var userLoggedInViewTemplate = $('#userLoggedInView-template').html();
     var userLoggedInViewHTML = _.template(userLoggedInViewTemplate);
     this.$el.html(userLoggedInViewHTML(playa.currentUser.toJSON()));
+
+    var userHomeViewTemplate = $('#userHomeView-template').html();
+    var userHomeViewHTML = _.template(userHomeViewTemplate);
+    $('#main').html(userHomeViewHTML);
 
   },
 
@@ -28,6 +33,20 @@ playa.UserLoggedInView = Backbone.View.extend({
 
       })
 
+  },
+
+  showHomeView: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    if (playa.currentUser){
+      playa.router.navigate("", true)
+      var userHomeViewTemplate = $('#userHomeView-template').html();
+      var userHomeViewHTML = _.template(userHomeViewTemplate);
+      $('#main').html(userHomeViewHTML);
+    }
+    
   }
 
 });

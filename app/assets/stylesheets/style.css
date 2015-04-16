@@ -55,6 +55,10 @@ header nav {
   text-align: right;
 }
 
+.title{
+  color: #fff;
+}
+
 .title i {
   color: #FFF;
   padding-top: 0.4em;
@@ -76,6 +80,7 @@ nav li {
   display: inline-block;
   margin: 20px 10px;
   padding-bottom: 2px;
+  border-bottom: 3px solid transparent;
 }
 
 nav a {

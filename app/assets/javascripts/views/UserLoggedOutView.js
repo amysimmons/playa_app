@@ -3,7 +3,7 @@ playa.UserLoggedOutView = Backbone.View.extend({
 
   el: '#header',
   events: {
-    // "click .my-playlists-btn": 'createPlaylist'
+    "click .my-playlists-btn": 'createPlaylist'
   },
 
   render: function() {
